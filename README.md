@@ -1,7 +1,7 @@
-# Atlas
+# Jobfi.app 
 
-## Laravel React Inertia Tailwind starter kit
-
+## Forked from the Laravel React Inertia Tailwind starter kit Altas
+ 
 Includes Laravel Fortify for authentication
 
 ## Introduction
@@ -12,7 +12,7 @@ This starter is powered by React, Inertia, Tailwind and Laravel.
 
 ### Includes
 
--   Laravel v8.40
+-   Laravel v8.40 --will be updated to the newest version
 -   Laravel fortify v1.7
 -   Laravel sail v1.0.1
 -   React v17.0.2
