@@ -1,12 +1,15 @@
 import React from 'react'
 import { InertiaLink, usePage } from '@inertiajs/inertia-react'
 import PropTypes from 'prop-types'
+import { Navbar }  from "../layouts/components/Navbar";
+import { Footer } from "../layouts/components/Footer";
 
 function Welcome({canLogin, canRegister, laravelVersion, phpVersion}) {
     const { auth } = usePage().props
-
+    console.log(auth)
     return (
         <div>
+            <Navbar transparent />
             <div className="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
                 {
                     canLogin &&
@@ -117,6 +120,7 @@ function Welcome({canLogin, canRegister, laravelVersion, phpVersion}) {
 
                 </div>
             </div>
+            <Footer />
         </div>
     )
 }
