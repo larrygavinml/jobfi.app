@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\publicControllers\profileController;
+use App\Http\Controllers\JobController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use Inertia\Inertia;
@@ -16,14 +18,11 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+Route::get('/', [HomeController::class, 'index']);
+
+/** route for jobs */
+Route::get('jobs')->name('jobs')->uses('JobController@index');
+
 
 Route::inertia('/test', 'Test');
 

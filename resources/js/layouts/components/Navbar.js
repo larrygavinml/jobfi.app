@@ -1,7 +1,10 @@
 import React from "react";
+import { InertiaLink, usePage } from '@inertiajs/inertia-react';
 
 export function Navbar(props) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
+  const { user } = usePage().props;
+  console.log({user});
   return (
     <nav
       className={
@@ -43,73 +46,7 @@ export function Navbar(props) {
           id="example-navbar-warning"
         >
           <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
-            <li className="flex items-center">
-              <a
-                className={
-                  (props.transparent
-                    ? "lg:text-white lg:hover:text-gray-300 text-gray-800"
-                    : "text-gray-800 hover:text-gray-600") +
-                  " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-                }
-                href="#pablo"
-              >
-                <i
-                  className={
-                    (props.transparent
-                      ? "lg:text-gray-300 text-gray-500"
-                      : "text-gray-500") +
-                    " fab fa-facebook text-lg leading-lg "
-                  }
-                />
-                <span className="lg:hidden inline-block ml-2">Share</span>
-              </a>
-            </li>
-
-            <li className="flex items-center">
-              <a
-                className={
-                  (props.transparent
-                    ? "lg:text-white lg:hover:text-gray-300 text-gray-800"
-                    : "text-gray-800 hover:text-gray-600") +
-                  " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-                }
-                href="#pablo"
-              >
-                <i
-                  className={
-                    (props.transparent
-                      ? "lg:text-gray-300 text-gray-500"
-                      : "text-gray-500") +
-                    " fab fa-twitter text-lg leading-lg "
-                  }
-                />
-                <span className="lg:hidden inline-block ml-2">Tweet</span>
-              </a>
-            </li>
-
-            <li className="flex items-center">
-              <a
-                className={
-                  (props.transparent
-                    ? "lg:text-white lg:hover:text-gray-300 text-gray-800"
-                    : "text-gray-800 hover:text-gray-600") +
-                  " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-                }
-                href="#pablo"
-              >
-                <i
-                  className={
-                    (props.transparent
-                      ? "lg:text-gray-300 text-gray-500"
-                      : "text-gray-500") +
-                    " fab fa-github text-lg leading-lg "
-                  }
-                />
-                <span className="lg:hidden inline-block ml-2">Star</span>
-              </a>
-            </li>
-
-            <li className="flex items-center">
+          <li className="flex items-center">
               <button
                 className={
                   (props.transparent
@@ -124,6 +61,47 @@ export function Navbar(props) {
                Connect
               </button>
             </li>
+            
+            <li className="flex items-center">
+              <button
+                className={
+                  (props.transparent
+                    ? "bg-white text-gray-800 active:bg-gray-100"
+                    : "bg-pink-500 text-white active:bg-pink-600") +
+                  " text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3"
+                }
+                type="button"
+                style={{ transition: "all .15s ease" }}
+              >
+                <i className="fa fa-sign-in"></i> 
+                {
+                            user ?
+                            <InertiaLink href="/home" className="text-sm text-gray-700 underline">Home</InertiaLink>
+                            :
+                            <InertiaLink href="/login" className="text-sm text-gray-700 underline">Login</InertiaLink>
+                }
+              </button>
+            </li>
+    
+            <li className="flex items-center">
+              <button
+                className={
+                  (props.transparent
+                    ? "bg-white text-gray-800 active:bg-gray-100"
+                    : "bg-pink-500 text-white active:bg-pink-600") +
+                  " text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3"
+                }
+                type="button"
+                style={{ transition: "all .15s ease" }}
+              >
+                <i className="fa fa-registered"></i> 
+               {
+                <InertiaLink href="/register" className="ml-4 text-sm text-gray-700 underline">Reg</InertiaLink>
+                
+                }
+              </button>
+            </li>
+
           </ul>
         </div>
       </div>
