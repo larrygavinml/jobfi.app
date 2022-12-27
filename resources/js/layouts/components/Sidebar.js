@@ -96,6 +96,24 @@ function Sidebar({sidebarOpen, setSidebarOpen}) {
                 </div>
               </InertiaLink>
             </li>
+          {/*jobs */ }
+             <li className="px-3 py-2 rounded-sm mb-0.5">
+              <InertiaLink href="#" className="block text-gray-200 hover:text-white">
+                <div className="flex items-center flex-grow">
+                <i className="w-6 h-6 mr-1 fa-solid fa-briefcase"></i>
+                      <span className="text-sm font-medium">Jobs</span>
+                </div>
+              </InertiaLink>
+            </li>
+          {/*Company */ }
+               <li className="px-3 py-2 rounded-sm mb-0.5">
+              <InertiaLink href="#" className="block text-gray-200 hover:text-white">
+                <div className="flex items-center flex-grow">
+                <i className="w-6 h-6 mr-1 fa-solid fa-vault"></i>
+                      <span className="text-sm font-medium">Firms</span>
+                </div>
+              </InertiaLink>
+            </li>
           </ul>
         </div>
 
