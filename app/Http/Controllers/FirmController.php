@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Inertia\Inertia;
 use App\Models\Firm;
 use Illuminate\Http\Request;
 
@@ -44,9 +44,15 @@ class FirmController extends Controller
      * @param  \App\Models\Firm  $firm
      * @return \Illuminate\Http\Response
      */
-    public function show(Firm $firm)
+    public function show($hashid)
     {
-        //
+        
+          //
+          $firm = Firm::where('hashid',$hashid)->get();
+          return Inertia::render('firm/Index', [
+              'firm' => $firm,
+          ]);
+
     }
 
     /**

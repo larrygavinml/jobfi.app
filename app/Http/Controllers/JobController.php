@@ -52,9 +52,13 @@ class JobController extends Controller
      * @param  \App\Models\Job  $job
      * @return \Illuminate\Http\Response
      */
-    public function show(Job $job)
+    public function show($hashid)
     {
         //
+        $job = Job::where('hashid',$hashid)->get();
+        return Inertia::render('job/Index', [
+            'job' => $job,
+        ]);
     }
 
     /**

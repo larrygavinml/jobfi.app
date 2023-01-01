@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\publicControllers\profileController;
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\FirmController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
@@ -22,6 +23,12 @@ Route::get('/', [HomeController::class, 'index']);
 
 /** route for jobs */
 Route::get('jobs')->name('jobs')->uses('JobController@index');
+Route::get('/job/{hashid}', [JobController::class, 'show'])
+    ->name('job.show');
+
+/** route for firms */
+Route::get('/firm/{hashid}', [FirmController::class, 'show'])
+    ->name('firm.show');
 
 
 Route::inertia('/test', 'Test');
