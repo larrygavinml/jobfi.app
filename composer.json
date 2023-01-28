@@ -19,13 +19,18 @@
     ],
     "require": {
         "php": "^7.3|^8.0.10",
+        "bavix/laravel-wallet": "^7.3",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "inertiajs/inertia-laravel": "^0.4.2",
+        "kornrunner/keccak": "^1.1",
         "laravel/fortify": "^1.7",
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
+        "mateusjunges/laravel-invite-codes": "^1.5",
+        "simplito/elliptic-php": "^1.0",
+        "staudenmeir/eloquent-eager-limit": "^1.0",
         "tightenco/ziggy": "^1.2"
     },
     "require-dev": {

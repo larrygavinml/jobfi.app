@@ -5,7 +5,7 @@ import UpdatePasswordForm from './UpdatePasswordForm'
 import UpdateProfileInformationForm from './UpdateProfileInformationForm'
 import Layout from '@/layouts/Layout'
 import UpdateProfilePhoto from './UpdateProfilePhoto'
-
+import UserWallet from './UserWallet'
 
 function Show() {
     return (
@@ -24,6 +24,8 @@ function Show() {
                 <SectionBorder/>
               <UpdatePasswordForm/>
                 <SectionBorder/>
+              <UserWallet />  
+                <SectionBorder/>  
               <DeleteUserForm />
             </div>
           </Layout>

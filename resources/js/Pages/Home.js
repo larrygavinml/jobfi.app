@@ -1,9 +1,9 @@
 import React from 'react';
 import Layout from '../layouts/Layout';
-
+import{usePage} from '@inertiajs/inertia-react';
 
 function Home() {
-
+    const auth = usePage().props;
     return (
         <div>
             <Layout>
@@ -14,7 +14,7 @@ function Home() {
 
                 <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                     <div className="p-6 bg-white border-b border-gray-200">
-                        You're logged in!
+                        You have {auth.user.initbalance } Blue Bird Coin locked!
                     </div>
                 </div>
             </Layout>

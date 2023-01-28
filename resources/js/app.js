@@ -6,7 +6,9 @@ import { render } from 'react-dom'
 import { InertiaProgress } from '@inertiajs/progress'
 import '@fortawesome/fontawesome-free/css/all.css';
 
-const el = document.getElementById('app')
+
+
+const el = document.getElementById('app');
 
 render(
   <App

@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Firmtype;
 use App\Models\Job;
 use App\Models\Tag;
+use Staudenmeir\EloquentEagerLimit\HasEagerLimit;
 
 class Firm extends Model
 {
-    use HasFactory;
+    use HasFactory, HasEagerLimit;
     /***
      * firm types 
      */

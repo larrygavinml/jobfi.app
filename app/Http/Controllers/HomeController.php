@@ -11,7 +11,9 @@ class HomeController extends Controller
   public function index()
   {
     $firmids = Job::select('firm_id')->distinct()->get()->pluck('firm_id');
-    $firms = Firm::whereIn('id',$firmids)->with('jobs')->paginate();
+    $firms = Firm::whereIn('id',$firmids)->with('jobs', function ($query) {
+      $query->take(4);
+  })->paginate();
     return Inertia::render('Welcome', [
       'jobs' => Job::latest()->paginate(),
       'firms' => $firms,
