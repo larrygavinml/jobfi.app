@@ -38,19 +38,32 @@ This starter is powered by React, Inertia, Tailwind and Laravel.
 If your computer already has PHP and Composer installed, you may create a new project by using Composer directly.
 
 ```bash
-composer create-project nwanguma/atlas your-project-name
+cd your-project-name //example cd jobfi.app
 
-cd your-project-name
+composer install
 
-npm install
+composer update
 
-npm run dev
+yarn install
 
-cp .env.example .env
+cp .env.example .env 
+
+// edit env datebase info  
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=jobfi
+DB_USERNAME=jobfi
+DB_PASSWORD=your database password
+
+npm run prod
 
 php artisan key:generate
 
 php artisan storage:link
+
+php artisan serv
+
 ```
 
 ## To remove the documentation
