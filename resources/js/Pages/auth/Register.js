@@ -10,6 +10,7 @@ function Register() {
         email: "",
         password: "",
         confirmPassword: "",
+        invitedbycode:"",
       })
 
     const errors = usePage().props.errors;
@@ -29,7 +30,8 @@ function Register() {
             name: form.name,
             email: form.email,
             password: form.password,
-            password_confirmation: form.confirmPassword
+            password_confirmation: form.confirmPassword,
+            invitedbycode: form.invitedbycode,
         })
       }
 
@@ -91,7 +93,13 @@ function Register() {
                                 onChange={handleChange}
                                 className="w-full px-3 py-2 mt-1 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline" />
                             </div>
-
+                            <div className="flex flex-col pt-4">
+                                <label htmlFor="invitedbycode" className="text-lg">Invitation Code</label>
+                                <input type="text" id="invitedbycode" placeholder="Invitation Code"
+                                value={form.invitedbycode}
+                                onChange={handleChange}
+                                className="w-full px-3 py-2 mt-1 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline" />
+                            </div>
                             <input type="submit" value="Register" className="p-2 mt-8 text-lg font-bold text-white bg-black hover:bg-gray-700" />
                         </form>
                         <div className="pt-12 pb-12 text-center">

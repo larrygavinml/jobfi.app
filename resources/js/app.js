@@ -5,7 +5,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import { InertiaProgress } from '@inertiajs/progress'
 import '@fortawesome/fontawesome-free/css/all.css';
-
+import 'flowbite';
 
 
 const el = document.getElementById('app');

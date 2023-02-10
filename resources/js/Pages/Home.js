@@ -16,6 +16,15 @@ function Home() {
                     <div className="p-6 bg-white border-b border-gray-200">
                         You have {auth.user.initbalance } Blue Bird Coin locked!
                     </div>
+                    <div className="p-6 bg-white border-b border-gray-200">
+                        You have {auth.user.unlockedcoin } Blue Bird Coin unlocked!
+                    </div>
+                    <div className="p-6 bg-white border-b border-gray-200">
+                        Your invitation code is { auth.user.codeforinvite } 
+                    </div>
+                    <div className="p-6 bg-white border-b border-gray-200">
+                       Please share this invitation code for unlock you blocked coin!
+                    </div>
                 </div>
             </Layout>
         </div>

@@ -1,5 +1,5 @@
 import React from "react";
-
+import { InertiaLink } from '@inertiajs/inertia-react';
 
 export function Jobpage({job}) {
   return (
@@ -25,7 +25,15 @@ export function Jobpage({job}) {
                  <p className="focus:outline-none border-b w-full pb-2 border-sky-400 placeholder-gray-500 my-8">{job.description}</p>
                  <label>{job.applytype}</label>
                 <div className="flex justify-center my-6">
-                  <input className="rounded-full  p-3 w-full sm:w-56   bg-gradient-to-r from-sky-600  to-teal-300 text-white text-lg font-semibold " type="submit" value="Apply" />
+                  <button className="rounded-full  p-3 w-full sm:w-56   bg-gradient-to-r from-sky-600  to-teal-300 text-white text-lg font-semibold ">
+                  <InertiaLink
+                      tabIndex="-1"
+                      href={route('job.apply', job.hashid )}
+                      className="flex items-center px-6 py-4 focus:text-indigo focus:outline-none"
+                    >
+                      Apply
+                    </InertiaLink>
+                  </button>
                 </div>
           </div>
         </form>

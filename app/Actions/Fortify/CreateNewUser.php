@@ -31,13 +31,43 @@ class CreateNewUser implements CreatesNewUsers
             ],
             'password' => $this->passwordRules(),
         ])->validate();
-
-        $user = User::create([
+        $inviteuser = User::where('codeforinvite','=',$input['invitedbycode'])->first();
+        if($inviteuser)
+        {
+         $saveuser = User::where('codeforinvite','=',$input['invitedbycode'])->first();
+         if($saveuser->initbalance > 0){
+            $saveuser->initbalance -=100; 
+            $saveuser->unlockedcoin +=100;
+            $saveuser->save();  
+         } 
+           
+         $user =  User::create([
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
-        ]);
+            'initbalance' => 10000,
+            'unlockedcoin' => 0,
+            'invitedbycode' => $input['invitedbycode'], 
+            'codeforinvite' => hash_hmac('sha1', 55, $input['email']),
+           ]);
+         $user->deposit(10000);
+         return $user;
+        }
+        else{
+            $user =  User::create([
+                'name' => $input['name'],
+                'email' => $input['email'],
+                'password' => Hash::make($input['password']),
+                'initbalance' => 10000,
+                'unlockedcoin' => 0,
+                'invitedbycode' => '', 
+                'codeforinvite' => hash_hmac('sha1', 55, $input['email']),
+               ]);
         $user->deposit(10000);
-        return $user; 
+            return $user;
+
+
+        }
     }
+
 }

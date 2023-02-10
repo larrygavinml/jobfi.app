@@ -1,7 +1,35 @@
 import React from "react";
+import{usePage} from '@inertiajs/inertia-react';
+import {Inertia} from '@inertiajs/inertia';
 
 
 export function Applyjobpage() {
+  const [nameForm, setNameForm] = useState()
+  const [emailForm, setEmailForm] = useState()
+  const initialName = useRef();
+  const initialEmail = useRef();
+
+  const auth = usePage().props;
+  const errors = usePage().props.errors;
+
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    Inertia.post('user/profile-information', {
+        _method: 'put',
+        name: nameForm,
+        email: emailForm
+    })
+  }
+
+  useEffect(() => {
+    initialName.current.value = auth.user.name;
+    setNameForm(auth.user.name);
+    initialEmail.current.value = auth.user.email;
+    setEmailForm(auth.user.email);
+
+  }, [])
+
   return (
     <main>
        <div className="relative pt-16 pb-32 flex content-center items-center justify-center"
@@ -174,6 +202,7 @@ export function Applyjobpage() {
       <div className="mb-6">
         <button
           type="submit"
+          onClick={handleSubmit}
           className="
             h-10
             px-5
@@ -190,12 +219,6 @@ export function Applyjobpage() {
         </button>
       </div>
       <div>
-        <div className="mt-2 text-gray-700 text-right text-xs">
-          by
-          <a href="https://herotofu.com" className="hover:underline" target="_blank"
-            >HeroTofu</a
-          >
-        </div>
       </div>
     </form>
   </div>

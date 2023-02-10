@@ -24,6 +24,11 @@ class User extends Authenticatable implements Wallet
         'password',
         'photo_name',
         'wallet_address',
+        'invitedbycode',
+        'initbalance',
+        'codeforinvite',
+        'unlockedcoin',
+        'walletaddress'
     ];
 
     /**

@@ -5,7 +5,7 @@ import { InertiaLink } from '@inertiajs/inertia-react';
 
 export default function Jobslist({ firm }) {
     return (
-      <ul className="divide-y divide-slate-100">
+      <ul className="divide-y divide-slate-100 p-12 rounded border-solid border border-blue-500 border-opacity-0">
         <div className="flex ...">
          <div className="w-1/6 md:w-auto">
          <img src={firm.avatar_name ? `/storage/firmphoto/${firm.avatar_name}` : useDefaultPhoto(firm.title)} alt="" className="object-cover w-12 h-12 rounded-full"/>
