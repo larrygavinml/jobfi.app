@@ -6,8 +6,17 @@ import UpdateProfileInformationForm from './UpdateProfileInformationForm'
 import Layout from '@/layouts/Layout'
 import UpdateProfilePhoto from './UpdateProfilePhoto'
 import UserWallet from './UserWallet'
+import Updatewallet from './Updatewallet'
+import {usePage} from '@inertiajs/inertia-react'
 
 function Show() {
+  const auth = usePage().props;
+  let wallet;
+  if (auth.user.walletaddress) {
+    wallet = <UserWallet/>;
+  } else {
+    wallet =  <Updatewallet/>;
+  }
     return (
         <div>
           <Layout>
@@ -24,7 +33,7 @@ function Show() {
                 <SectionBorder/>
               <UpdatePasswordForm/>
                 <SectionBorder/>
-              <UserWallet />  
+               { wallet } 
                 <SectionBorder/>  
               <DeleteUserForm />
             </div>

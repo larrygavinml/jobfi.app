@@ -38,7 +38,40 @@ class profileController extends Controller
             return redirect()->route('profile');
         }
     }
+    /**user wallet update */
+    public function userwallet(Request $request)
+    {
+        if($request->walletaddress){
+            auth()->user()->update([
+                'walletaddress' => $request->walletaddress
+            ]);
 
+            return redirect()->route('profile');
+        }
+    }
+    /**withdraw user coin */
+    public function withdrawcoin(Request $request)
+    {
+        if($request->hasFile('photo')){
+            $photo = $request->file('photo');
+            $filename = auth()->user()->id . '.' . $photo->getClientOriginalExtension();
+            if($photo->getClientOriginalExtension() !== 'jpg'){
+
+                return inertia('profile/Show', [
+                    'photoMessage' => 'Only upload .jpg files'
+                ]);
+             }
+
+            $this->deleteOldImage();
+
+            Storage::putFileAs('public/profilePhotos', $photo, $filename );
+            auth()->user()->update([
+                'photo_name' => $filename
+            ]);
+
+            return redirect()->route('profile');
+        }
+    }
     protected function deleteOldImage()
     {
         if(auth()->user()->photo_name)  {

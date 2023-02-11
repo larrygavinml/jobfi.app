@@ -12,7 +12,7 @@ function UserWallet() {
 
   function handleSubmit(e) {
     e.preventDefault()
-    Inertia.post('user/balance-withdraw', {
+    Inertia.post('withdrawcoin', {
         _method: 'put',
         balance: balanceIntForm
     })
@@ -37,12 +37,21 @@ function UserWallet() {
                       <label className="block text-sm font-medium text-gray-700" htmlFor="name">
                         <span>Blocked Wallet Account</span>
                       </label>
-                      <p>{ auth.user.initbalance } Blue Bird Coin</p>
+                      <p>{ auth.user.unlockedcoin } Blue Bird Coin</p> 
                       {errors.updateProfileInformation &&
                        <div className="text-sm text-red-500">{ errors.updateProfileInformation.balance }</div>
                       }
                     </div>
-
+                    {/* Wallet address */}
+                    <div className="col-span-6 sm:col-span-4">
+                      <label className="block text-sm font-medium text-gray-700" htmlFor="name">
+                        <span>Wallet Account Polygon Address</span>
+                      </label>
+                      <p>{ auth.user.walletaddress }</p> 
+                      {errors.updateProfileInformation &&
+                       <div className="text-sm text-red-500">{ errors.updateProfileInformation.balance }</div>
+                      }
+                    </div>
                   
 
                   </div>

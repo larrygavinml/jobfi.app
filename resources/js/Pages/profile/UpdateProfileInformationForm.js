@@ -1,5 +1,5 @@
 import React,{useState, useEffect, useRef} from 'react';
-import{usePage} from '@inertiajs/inertia-react';
+import {usePage} from '@inertiajs/inertia-react';
 import {Inertia} from '@inertiajs/inertia';
 
 function UpdateProfileInformationForm() {
