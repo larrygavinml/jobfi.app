@@ -25,6 +25,9 @@ function Home() {
                     <div className="p-6 bg-white border-b border-gray-200">
                        Please share this invitation code for unlock you blocked coin!
                     </div>
+                    <div className="p-6 bg-white border-b border-gray-200">
+                        Join our Telgram group to know the latest news!!<a href="https://t.me/+YFsrZFFzbys4ZGM1">Jobfi.ETH</a>
+                    </div>
                 </div>
             </Layout>
         </div>

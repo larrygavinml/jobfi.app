@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState, useEffect, useRef} from 'react';
 import{usePage} from '@inertiajs/inertia-react';
 import {Inertia} from '@inertiajs/inertia';
 
@@ -15,7 +15,7 @@ export function Applyjobpage() {
 
   function handleSubmit(e) {
     e.preventDefault()
-    Inertia.post('user/profile-information', {
+    Inertia.post('job.userapply', {
         _method: 'put',
         name: nameForm,
         email: emailForm
@@ -23,11 +23,19 @@ export function Applyjobpage() {
   }
 
   useEffect(() => {
-    initialName.current.value = auth.user.name;
-    setNameForm(auth.user.name);
-    initialEmail.current.value = auth.user.email;
-    setEmailForm(auth.user.email);
-
+    if(auth){
+      initialName.current.value = auth.user.name;
+      setNameForm(auth.user.name);
+      initialEmail.current.value = auth.user.email;
+      setEmailForm(auth.user.email); 
+    }
+    else{
+      initialName.current.value =  "Your Name";
+      setNameForm("Your Name");
+      initialEmail.current.value = "Your Email"
+      setEmailForm("Your Email");  
+    }
+   
   }, [])
 
   return (
@@ -49,45 +57,25 @@ export function Applyjobpage() {
     <form>
       <label className="block mb-6">
         <span className="text-gray-700">Your name</span>
-        <input
-          required
-          name="name"
-          type="text"
-          className="
-            block
-            w-full
-            mt-1
-            border-gray-300
-            rounded-md
-            shadow-sm
-            focus:border-indigo-300
-            focus:ring
-            focus:ring-indigo-200
-            focus:ring-opacity-50
-          "
-          placeholder="Joe Bloggs"
-        />
+            <input id="name" type="text"
+                        ref={initialName}
+                        onChange={(e) => setNameForm(e.target.value)}
+                        className="block w-full h-10 mt-1 border border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                      />
+                      {errors.applyjob &&
+                       <div className="text-sm text-red-500">{ errors.applyjob.name }</div>
+                      }
       </label>
       <label className="block mb-6">
         <span className="text-gray-700">Email address</span>
-        <input
-          required
-          name="email"
-          type="email"
-          className="
-            block
-            w-full
-            mt-1
-            border-gray-300
-            rounded-md
-            shadow-sm
-            focus:border-indigo-300
-            focus:ring
-            focus:ring-indigo-200
-            focus:ring-opacity-50
-          "
-          placeholder="joe.bloggs@example.com"
-        />
+        <input id="email" type="email"
+                        ref={initialEmail}
+                        onChange={(e) => setEmailForm(e.target.value)}
+                        className="block w-full h-10 mt-1 border border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                      />
+                      {errors.applyjob &&
+                       <div className="text-sm text-red-500">{ errors.applyjob.email }</div>
+                      }
       </label>
       <label className="block mb-6">
         <span className="text-gray-700">Years of experience</span>

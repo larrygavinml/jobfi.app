@@ -61,6 +61,20 @@ class JobController extends Controller
         ]);
     }
 
+      /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Job  $job
+     * @return \Illuminate\Http\Response
+     */
+    public function apply($hashid)
+    {
+        //
+        $job = Job::where('hashid',$hashid)->get();
+        return Inertia::render('job/apply', [
+            'job' => $job,
+        ]);
+    }
     /**
      * Show the form for editing the specified resource.
      *

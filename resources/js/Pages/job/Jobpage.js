@@ -1,7 +1,10 @@
 import React from "react";
 import { InertiaLink } from '@inertiajs/inertia-react';
+import{usePage} from '@inertiajs/inertia-react';
 
 export function Jobpage({job}) {
+  const { user } = usePage().props;
+
   return (
     <main>
        <div className="relative pt-16 pb-32 flex content-center items-center justify-center"
@@ -26,13 +29,14 @@ export function Jobpage({job}) {
                  <label>{job.applytype}</label>
                 <div className="flex justify-center my-6">
                   <button className="rounded-full  p-3 w-full sm:w-56   bg-gradient-to-r from-sky-600  to-teal-300 text-white text-lg font-semibold ">
-                  <InertiaLink
-                      tabIndex="-1"
-                      href={route('job.apply', job.hashid )}
-                      className="flex items-center px-6 py-4 focus:text-indigo focus:outline-none"
-                    >
-                      Apply
-                    </InertiaLink>
+                 {   
+                       user?
+                          <InertiaLink tabIndex="-1"  href={route('job.apply', job.hashid )} className="flex items-center px-6 py-4 focus:text-indigo focus:outline-none"> Apply </InertiaLink>
+                  
+                       :
+                         <InertiaLink href="/login" className="text-sm text-gray-700 underline">Please Login First</InertiaLink>
+        
+                  }
                   </button>
                 </div>
           </div>
