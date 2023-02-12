@@ -8,8 +8,8 @@ import Pagination from '../Shared/Pagination';
 
 export function Landing(props) {
     const { jobs,firms } = usePage().props;
-    console.log({jobs});
-    console.log({firms});
+    // console.log('jobs',{jobs});
+    // console.log('firms',{firms});
     const {
       data,
       links,

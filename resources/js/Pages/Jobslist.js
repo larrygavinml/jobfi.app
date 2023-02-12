@@ -1,16 +1,19 @@
-import React,{setState} from "react";
+import React,{memo, setState} from "react";
 import Listitem from "./Listitem";
 import {useDefaultPhoto} from '@/hooks/constants';
 import { InertiaLink } from '@inertiajs/inertia-react';
 
-export default function Jobslist({ firm }) {
-    return (
-      <ul className="divide-y divide-slate-100 p-12 rounded border-solid border border-blue-500 border-opacity-0">
-        <div className="flex ...">
+const Jobslist = memo(({ firm }) => {
+  return (
+    <ul className="">
+    {/* <ul className="divide-y divide-slate-100"> */}
+        <div className="flex items-center ...">
          <div className="w-1/6 md:w-auto">
-         <img src={firm.avatar_name ? `/storage/firmphoto/${firm.avatar_name}` : useDefaultPhoto(firm.title)} alt="" className="object-cover w-12 h-12 rounded-full"/>
+        
+         <img src={firm.avatar_name ? `/storage/firmphoto/${firm.avatar_name}` : useDefaultPhoto(firm.title)} alt="" className={`object-cover w-12 h-12 ml-1 rounded-full ${firm.avatar_name ? '' : 'hidden'}`}/>
+
          </div>
-        <h4 className="w-5/6 md:w-auto p-2 text-3xl text-left text-bold">
+        <h4 className="ml-52 w-5/6 md:w-auto p-2 text-3xl text-left text-bold">
         <InertiaLink
                       tabIndex="-1"
                       href={route('firm.show', firm.hashid)}
@@ -24,6 +27,7 @@ export default function Jobslist({ firm }) {
                   <Listitem key={data.id} job={data} />
                    ))}
       </ul>
-    )
-  }
-  
+  )
+})
+
+export default Jobslist
