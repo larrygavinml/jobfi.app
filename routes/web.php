@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Web3LoginController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
+use App\Http\Controllers\VerifyController;
 use Inertia\Inertia;
 
 /*
@@ -37,8 +38,8 @@ Route::get('/post/{hashid}', [FirmController::class, 'post'])
 
 Route::inertia('/test', 'Test');
 
-Route::group(['middleware' => 'auth'], function() {
-    Route::inertia('/home', 'Home');
+Route::group(['middleware' => 'auth', 'verified'], function() {
+    Route::inertia('/home', 'Home')->middleware('verified');
 
     Route::get('/profile', [profileController::class, 'index'])->name('profile');
     Route::put('/userwallet',[profileController::class, 'userwallet'])->name('userwallet');
@@ -47,5 +48,6 @@ Route::group(['middleware' => 'auth'], function() {
     Route::delete('/profilePhotoDelete', [profileController::class, 'deleteProfilePhoto'])->name('profilePhotoDelete');
     Route::put('/profilePhotoUpdate', [profileController::class, 'updateProfilePhoto'])->name('profilePhotoUpdate');
     Route::delete('/profileDelete', [profileController::class, 'deleteProfile'])->name('profileDelete');
-
+    Route::get('/verify/{token}', [VerifyController::class,'VerifyEmail'])->name('verify');
+    Route::post('/email/verify/resend', [VerifyController::class, 'resend'])->name('verification.resend');
 });

@@ -48,7 +48,7 @@ class FirmController extends Controller
     {
         
           //
-          $firm = Firm::where('hashid',$hashid)->get();
+          $firm = Firm::where('hashid',$hashid)->with('jobs')->get();
           return Inertia::render('firm/Index', [
               'firm' => $firm,
           ]);

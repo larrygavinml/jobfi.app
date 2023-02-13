@@ -6,6 +6,7 @@ use App\Actions\Fortify\CreateNewUser;
 use App\Actions\Fortify\ResetUserPassword;
 use App\Actions\Fortify\UpdateUserPassword;
 use App\Actions\Fortify\UpdateUserProfileInformation;
+use Laravel\Fortify\Contracts\LoginResponse;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
@@ -23,6 +24,14 @@ class FortifyServiceProvider extends ServiceProvider
     public function register()
     {
         //
+      /** 
+       *  $this->app->instance(LoginResponse::class, new class implements LoginResponse {
+       **     public function toResponse($request)
+       *     {
+       *         return redirect('/');
+       *     }
+       * });
+       * */ 
     }
 
     /**
@@ -57,5 +66,9 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::resetPasswordView(function () {
             return Inertia::render('auth/ResetPassword');
         });
+        Fortify::verifyEmailView(function () {
+            return Inertia::render('auth/VerifyEmail');
+        });
+     
     }
 }
