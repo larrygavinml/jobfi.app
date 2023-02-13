@@ -1,47 +1,44 @@
-import React from "react";
+import React, { memo } from 'react'
 import { InertiaLink } from '@inertiajs/inertia-react';
 import{usePage} from '@inertiajs/inertia-react';
 
-export function Jobpage({job}) {
+const Jobpage = memo(({job}) => {
   const { user } = usePage().props;
 
   return (
-    <main>
-       <div className="relative pt-16 pb-32 flex content-center items-center justify-center"
+    <div>
+      <div className="relative pt-16 pb-32 flex content-center items-center justify-center"
+          style={{
+            minHeight: "20vh"
+          }}>
+        <div className="absolute top-0 w-full h-full bg-center bg-cover"
             style={{
-              minHeight: "20vh"
+              backgroundImage: `url("https://jobfi-io.imgix.net/bg222.b2568a38.jpg")`
             }}>
-          <div className="absolute top-0 w-full h-full bg-center bg-cover"
-              style={{
-                backgroundImage: `url("https://jobfi-io.imgix.net/bg222.b2568a38.jpg")`
-              }}>
-            <span id="blackOverlay" className="w-full h-full absolute opacity-75 bg-black"></span>
-          </div>
+          <span id="blackOverlay" className="w-full h-full absolute opacity-75 bg-black"></span>
         </div>
+      </div>
 
-       <section className="pt-20 pb-48">
-       <form className="w-full h-auto overflow-scroll block h-screen bg-gradient-to-r from-blue-100 via-purple-100 to-pink-100 p-4 flex items-center justify-center" >
-         <div className="flex flex-col items-start justify-start w-full h-full p-10 lg:p-16 xl:p-24 tails-selected-element">
-              <h4 className="w-full text-3xl font-bold md:flex-row">{job.title}</h4>
-                <label>Description</label>
-                <h3>{job.location}</h3>
-                 <p className="focus:outline-none border-b w-full pb-2 border-sky-400 placeholder-gray-500 my-8">{job.description}</p>
-                 <label>{job.applytype}</label>
-                <div className="flex justify-center my-6">
-                  <button className="rounded-full  p-3 w-full sm:w-56   bg-gradient-to-r from-sky-600  to-teal-300 text-white text-lg font-semibold ">
-                 {   
-                       user?
-                          <InertiaLink tabIndex="-1"  href={route('job.apply', job.hashid )} className="flex items-center px-6 py-4 focus:text-indigo focus:outline-none"> Apply </InertiaLink>
-                  
-                       :
-                         <InertiaLink href="/login" className="text-sm text-gray-700 underline">Please Login First</InertiaLink>
-        
-                  }
-                  </button>
-                </div>
+      <div className="w-full py-20">
+        <div className="ml-96">
+          <div className="flex justify-start items-center text-3xl font-bold block">
+            {job.title}
+            <span className="mt-2 ml-20 h-8 px-2 leading-8 rounded text-xs text-white bg-blue-500" >{job.worktype}</span>
           </div>
-        </form>
-        </section>  
-    </main>    
+          <span className="my-5 text-base block">Worklocation - {job.worklocation}</span>
+          <span className={`my-5 text-base block ${job.salaryrange ? '' : 'hidden'}`}>Salary : {job.salaryrange}</span>
+          <span className="text-xl block">Description</span>
+          <div className="max-w-2xl text-lg my-2">{job.description}</div>
+          <button className="mt-5 rounded-md text-white text-base font-semibold bg-green-500 hover:bg-green-700">{
+            user?
+            <InertiaLink tabIndex="-1"  href={route('job.apply', job.hashid )} className="flex items-center px-14 py-3"> Apply </InertiaLink>:
+            <InertiaLink href="/login" className="flex items-center px-14 py-3">Please Login First</InertiaLink>
+          }
+          </button>
+        </div>
+      </div>
+    </div>    
   );
-}
+})
+
+export default Jobpage

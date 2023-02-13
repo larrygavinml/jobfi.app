@@ -1,6 +1,6 @@
 import React from 'react';
 import { InertiaLink, usePage } from '@inertiajs/inertia-react';
-import { Jobpage } from "./Jobpage";
+import Jobpage from "./Jobpage";
 import { Navbar }  from "../../layouts/components/Navbar";
 import { Footer } from "../../layouts/components/Footer";
 
