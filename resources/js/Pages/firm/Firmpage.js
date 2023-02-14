@@ -1,6 +1,8 @@
 import React, { memo } from 'react'
+import Listitem from '../Listitem'
 
 const Firmpage = memo(({firm}) => {
+  // console.log('firm',firm)
   return (
     <div>
        <div className="relative pt-16 pb-32 flex content-center items-center justify-center"
@@ -15,17 +17,19 @@ const Firmpage = memo(({firm}) => {
           </div>
         </div>
 
-      <div className="flex justify-center my-20">
-        <div>
-          <div className="w-full text-3xl font-bold block">{firm.title}</div>
-          <h2 className="py-5 text-xl">{firm.purpose}</h2>
-          <p className="max-w-4xl text-xl">{firm.description}</p>
-          <form className="mt-10 w-full h-auto " >
+      <div className="my-20">
+        <div className="ml-60 text-3xl font-bold block">{firm.title}</div>
+          <h2 className="ml-60 py-5 text-xl">{firm.purpose}</h2>
+          <p className="ml-60 mr-20 text-xl max-w-full">{firm.description}</p>
+
+          <form className="ml-60 mt-10 h-auto " >
             <input className="px-14 py-3 rounded-md text-white text-base font-semibold bg-green-500 hover:bg-green-700" type="submit" value="Post" />
           </form>
+
+          <div className="mt-10">
+            {firm.jobs.map((data) => (<Listitem key={data.id} job={data} />))}
+          </div>
         </div>
-        
-      </div>
     </div>    
   )
 })
