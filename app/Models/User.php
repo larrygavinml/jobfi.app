@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 /** add wallet for user account use */
 use Bavix\Wallet\Traits\HasWallet;
 use Bavix\Wallet\Interfaces\Wallet;
-
+use App\Models\Job;
 class User extends Authenticatable implements MustVerifyEmail,Wallet
 {
     use HasFactory, Notifiable, HasWallet;
@@ -41,6 +41,12 @@ class User extends Authenticatable implements MustVerifyEmail,Wallet
         'remember_token',
     ];
 
+    /**User have mutiple jobs */
+    public function jobs(){
+
+        return $this->belongsToMany(Job::class, 'user_job','user_id','job_id');
+        
+        }
     /**
      * The attributes that should be cast to native types.
      *

@@ -30,6 +30,8 @@ Route::get('/job/{hashid}', [JobController::class, 'show'])
     ->name('job.show');
 Route::get('/apply/{hashid}', [JobController::class, 'apply'])
     ->name('job.apply');
+Route::post('/userapply', [JobController::class, 'userapply'])
+    ->name('userapply');    
 /** route for firms */
 Route::get('/firm/{hashid}', [FirmController::class, 'show'])
     ->name('firm.show');

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 use App\Http\Resources\JobCollection;
 use App\Models\Job;
+use App\Models\User_Job;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Auth;
 
 class JobController extends Controller
 {
@@ -75,6 +77,31 @@ class JobController extends Controller
             'job' => $job,
         ]);
     }
+      /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Job  $job
+     * @return \Illuminate\Http\Response
+     */
+    public function userapply(Request $request)
+    {
+        if($request->hasFile('cv')){
+            $photo = $request->file('cv');
+            $filename = $request->userid. '.' . $photo->getClientOriginalExtension();
+
+            $this->deleteOldImage();
+
+            Storage::putFileAs('public/usercv', $photo, $filename );
+            auth()->user()->update([
+                'cv_name' => $filename
+            ]); 
+            $userjob =  new User_Job;
+            $userjob->user_id = $request->userid;
+            $userjob->job_id = $request->jobid; 
+            $userjob->save();       
+            return response() -> json(['status' => 200, 'user' => $user]);
+        }
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -85,7 +112,12 @@ class JobController extends Controller
     {
         //
     }
-
+    protected function deleteOldcv()
+    {
+        if(auth()->user()->cv_name)  {
+          Storage::delete('public/usercv/'.auth()->user()->cv_name );
+        }
+    }
     /**
      * Update the specified resource in storage.
      *

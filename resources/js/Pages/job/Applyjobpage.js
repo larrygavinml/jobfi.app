@@ -1,7 +1,7 @@
 import React,{useState, useEffect, useRef} from 'react';
-import{usePage} from '@inertiajs/inertia-react';
+import{usePage, useForm } from '@inertiajs/inertia-react';
 import {Inertia} from '@inertiajs/inertia';
-
+import Swal from 'sweetalert2';
 
 export function Applyjobpage() {
   const [nameForm, setNameForm] = useState()
@@ -9,16 +9,29 @@ export function Applyjobpage() {
   const initialName = useRef();
   const initialEmail = useRef();
 
+   const { cv } = usePage().props
+  
+    const { data, setData, errors, post, progress } = useForm({
+        userid: "",
+        jobid: "",
+        cv: null,
+    });
+  const job = usePage().props;
   const auth = usePage().props;
-  const errors = usePage().props.errors;
-
 
   function handleSubmit(e) {
     e.preventDefault()
-    Inertia.post('job.userapply', {
-        _method: 'put',
-        name: nameForm,
-        email: emailForm
+    Inertia.post('/userapply', {
+        hashid: job.hashid,
+        userid: auth.user.id,
+        jobid: job.id,
+        cv:  cv 
+    },{
+      onSuccess: () => {  Swal.fire({
+        title: 'Apply Success',
+        text:  'You have applied this job.Please wait for the',
+        type: 'success',
+           });	}
     })
   }
 
@@ -140,6 +153,7 @@ export function Applyjobpage() {
           "
         />
       </label>
+
       <div className="mb-6">
         <div className="mt-2">
           <div>

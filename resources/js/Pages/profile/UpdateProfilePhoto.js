@@ -2,6 +2,7 @@ import React,{useState, useRef} from 'react'
 import{usePage} from '@inertiajs/inertia-react';
 import {Inertia} from '@inertiajs/inertia';
 import {useDefaultPhoto} from '@/hooks/constants';
+import Swal from 'sweetalert2';
 
 function UpdateProfilePhoto() {
   const [photoPreview, setPhotoPreview] = useState(null);
