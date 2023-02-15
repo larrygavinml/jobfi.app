@@ -18,6 +18,10 @@ export function Applyjobpage() {
     });
   const job = usePage().props;
   const auth = usePage().props;
+  const hashid = usePage().props;
+  console.log(job);
+  console.log(auth);
+  console.log(hashid);
 
   function handleSubmit(e) {
     e.preventDefault()

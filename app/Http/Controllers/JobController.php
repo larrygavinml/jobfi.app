@@ -57,7 +57,7 @@ class JobController extends Controller
     public function show($hashid)
     {
         //
-        $job = Job::where('hashid',$hashid)->get();
+        $job = Job::where('hashid',$hashid)->first();
         return Inertia::render('job/Index', [
             'job' => $job,
         ]);
@@ -72,7 +72,7 @@ class JobController extends Controller
     public function apply($hashid)
     {
         //
-        $job = Job::where('hashid',$hashid)->get();
+        $job = Job::where('hashid',$hashid)->first();
         return Inertia::render('job/apply', [
             'job' => $job,
         ]);
