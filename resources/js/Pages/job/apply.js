@@ -1,5 +1,5 @@
 import React from 'react';
-import { Applyjobpage } from "./Applyjobpage";
+import Applyjobpage from "./Applyjobpage";
 import { Navbar }  from "../../layouts/components/Navbar";
 import { Footer } from "../../layouts/components/Footer";
 
