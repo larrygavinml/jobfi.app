@@ -10,7 +10,7 @@ const Index = (props) => {
   return (
     <div>
     <Navbar transparent />
-    <Jobpage job={ job[0] } />
+    <Jobpage job={ job } />
     <Footer />
     </div>           
   );
