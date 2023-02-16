@@ -1,11 +1,12 @@
-import React,{useState, useEffect, useRef } from 'react';
+import React,{useState, useEffect, useRef} from 'react';
 import{usePage, useForm } from '@inertiajs/inertia-react';
 import {Inertia} from '@inertiajs/inertia';
 import Swal from 'sweetalert2';
-import axios from 'axios';
+
 export function Applyjobpage() {
   const [nameForm, setNameForm] = useState()
   const [emailForm, setEmailForm] = useState()
+  const [cvfile, setCvFile] = useState()
   const initialName = useRef();
   const initialEmail = useRef();
   const  formData = useRef(); 
@@ -16,32 +17,27 @@ export function Applyjobpage() {
         jobid: "",
         cv: null,
     });
-    
   const job = usePage().props;
   const auth = usePage().props;
+  const hashid = usePage().props;
+  console.log(job);
+  console.log(auth);
+  console.log(hashid);
 
   function handleSubmit(e) {
-    axios('/api/jobapply', {
-      method: 'post',
-      data: {
+    e.preventDefault()
+    Inertia.post('/userapply', {
+        hashid: job.hashid,
         userid: auth.user.id,
         jobid: job.id,
-        cv: cv,
-      },
-      headers: { "Content-Type": "multipart/form-data" },
-    }) .then((response) => {
-            if (response.status === 300) {
-              Swal.fire({
-                title: '评价完毕',
-                text:  '请评价下一个IP',
-                type: 'success',
-                   });	
-            }
-        })
-        .catch((error) => {
-            console.error(error);
-        });
-  
+        cv:  cv 
+    },{
+      onSuccess: () => {  Swal.fire({
+        title: 'Apply Success',
+        text:  'You have applied this job.Please wait for the',
+        type: 'success',
+           });	}
+    })
   }
 
   useEffect(() => {
@@ -82,7 +78,7 @@ export function Applyjobpage() {
             <input id="name" type="text"
                         ref={initialName}
                         onChange={(e) => setNameForm(e.target.value)}
-                        className="block w-full h-10 mt-1 border border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        className="block w-full h-10 mt-1 border border-gray-300 rounded-md shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50"
                       />
                       {errors.applyjob &&
                        <div className="text-sm text-red-500">{ errors.applyjob.name }</div>
@@ -93,7 +89,7 @@ export function Applyjobpage() {
         <input id="email" type="email"
                         ref={initialEmail}
                         onChange={(e) => setEmailForm(e.target.value)}
-                        className="block w-full h-10 mt-1 border border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        className="block w-full h-10 mt-1 border border-gray-300 rounded-md shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50"
                       />
                       {errors.applyjob &&
                        <div className="text-sm text-red-500">{ errors.applyjob.email }</div>
@@ -111,9 +107,9 @@ export function Applyjobpage() {
             border-gray-300
             rounded-md
             shadow-sm
-            focus:border-indigo-300
+            focus:border-green-300
             focus:ring
-            focus:ring-indigo-200
+            focus:ring-green-200
             focus:ring-opacity-50
           "
         >
@@ -136,9 +132,9 @@ export function Applyjobpage() {
             border-gray-300
             rounded-md
             shadow-sm
-            focus:border-indigo-300
+            focus:border-green-300
             focus:ring
-            focus:ring-indigo-200
+            focus:ring-green-200
             focus:ring-opacity-50
           "
           rows="3"
@@ -151,16 +147,13 @@ export function Applyjobpage() {
           required
           name="cv"
           type="file"
-          onChange={(e) =>
-            setData("cv", e.target.files[0])
-        }
           className="
             block
             w-full
             mt-1
-            focus:border-indigo-300
+            focus:border-green-300
             focus:ring
-            focus:ring-indigo-200
+            focus:ring-green-200
             focus:ring-opacity-50
           "
         />
@@ -175,14 +168,14 @@ export function Applyjobpage() {
                 value="yes"
                 type="radio"
                 className="
-                  text-indigo-600
+                  text-green-600
                   border-gray-300
                   rounded-full
                   shadow-sm
-                  focus:border-indigo-300
+                  focus:border-green-300
                   focus:ring
                   focus:ring-offset-0
-                  focus:ring-indigo-200
+                  focus:ring-green-200
                   focus:ring-opacity-50
                 "
                 checked
@@ -197,14 +190,14 @@ export function Applyjobpage() {
                 value="no"
                 type="radio"
                 className="
-                  text-indigo-600
+                  text-green-600
                   border-gray-300
                   rounded-full
                   shadow-sm
-                  focus:border-indigo-300
+                  focus:border-green-300
                   focus:ring
                   focus:ring-offset-0
-                  focus:ring-indigo-200
+                  focus:ring-green-200
                   focus:ring-opacity-50
                 "
               />
@@ -220,13 +213,13 @@ export function Applyjobpage() {
           className="
             h-10
             px-5
-            text-indigo-100
-            bg-indigo-700
+            text-green-100
+            bg-green-500
             rounded-lg
             transition-colors
             duration-150
             focus:shadow-outline
-            hover:bg-indigo-800
+            hover:bg-green-700
           "
         >
           Apply
@@ -239,4 +232,6 @@ export function Applyjobpage() {
        </section>  
     </main>    
   );
-}
+})
+
+export default Applyjobpage
