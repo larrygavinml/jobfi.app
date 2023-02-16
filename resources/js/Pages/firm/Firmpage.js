@@ -20,7 +20,7 @@ const Firmpage = memo(({firm}) => {
       <div className="my-20">
         <div className="ml-60 text-3xl font-bold block">{firm.title}</div>
           <h2 className="ml-60 py-5 text-xl">{firm.purpose}</h2>
-          <p className="ml-60 mr-20 text-xl max-w-full">{firm.description}</p>
+          <p className="ml-60 mr-20 text-xl max-w-full" dangerouslySetInnerHTML={{ __html: firm.description }} />
           <div className="mt-10">
             {firm.jobs.map((data) => (<Listitem key={data.id} job={data} />))}
           </div>

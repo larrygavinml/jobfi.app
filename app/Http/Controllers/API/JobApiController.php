@@ -86,12 +86,13 @@ class JobApiController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function jobapply(Request $request)
-    {
+    {   
+        var_dump($request->cv);
         if($request->hasFile('cv')){
             $photo = $request->file('cv');
             $filename = $request->userid. '.' . $photo->getClientOriginalExtension();
 
-            $this->deleteOldcv();
+            //$this->deleteOldcv();
 
             Storage::putFileAs('public/usercv', $photo, $filename );
             auth()->user()->update([
@@ -101,7 +102,7 @@ class JobApiController extends Controller
             $userjob->user_id = $request->userid;
             $userjob->job_id = $request->jobid; 
             $userjob->save();       
-            return response() -> json(['status' => 200]);
+            return response() -> json(['status' => 300]);
         }
     }
     /**

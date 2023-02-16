@@ -9,6 +9,9 @@
 .header-text{
     @apply mb-1 text-lg font-bold text-gray-800 md:text-xl;
 }
+.css-fix {
+    white-space: pre-wrap;  
+  }
 
 button{
     @apply focus:outline-none;

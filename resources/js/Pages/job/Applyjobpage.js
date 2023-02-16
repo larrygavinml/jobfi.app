@@ -1,42 +1,47 @@
-import React,{useState, useEffect, useRef} from 'react';
+import React,{useState, useEffect, useRef } from 'react';
 import{usePage, useForm } from '@inertiajs/inertia-react';
 import {Inertia} from '@inertiajs/inertia';
 import Swal from 'sweetalert2';
-
+import axios from 'axios';
 export function Applyjobpage() {
   const [nameForm, setNameForm] = useState()
   const [emailForm, setEmailForm] = useState()
   const initialName = useRef();
   const initialEmail = useRef();
-
-   const { cv } = usePage().props
+  const  formData = useRef(); 
+  const  cvfile  = useRef(null);
   
     const { data, setData, errors, post, progress } = useForm({
         userid: "",
         jobid: "",
         cv: null,
     });
+    
   const job = usePage().props;
   const auth = usePage().props;
-  const hashid = usePage().props;
-  console.log(job);
-  console.log(auth);
-  console.log(hashid);
 
   function handleSubmit(e) {
-    e.preventDefault()
-    Inertia.post('/userapply', {
-        hashid: job.hashid,
+    axios('/api/jobapply', {
+      method: 'post',
+      data: {
         userid: auth.user.id,
         jobid: job.id,
-        cv:  cv 
-    },{
-      onSuccess: () => {  Swal.fire({
-        title: 'Apply Success',
-        text:  'You have applied this job.Please wait for the',
-        type: 'success',
-           });	}
-    })
+        cv: cv,
+      },
+      headers: { "Content-Type": "multipart/form-data" },
+    }) .then((response) => {
+            if (response.status === 300) {
+              Swal.fire({
+                title: '评价完毕',
+                text:  '请评价下一个IP',
+                type: 'success',
+                   });	
+            }
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+  
   }
 
   useEffect(() => {
@@ -146,6 +151,9 @@ export function Applyjobpage() {
           required
           name="cv"
           type="file"
+          onChange={(e) =>
+            setData("cv", e.target.files[0])
+        }
           className="
             block
             w-full
