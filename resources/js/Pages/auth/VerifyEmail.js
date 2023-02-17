@@ -2,24 +2,48 @@ import React, {useState} from 'react'
 import backgroundImage from './assets/images/auth-image.jpg';
 import {Inertia} from '@inertiajs/inertia';
 import{InertiaLink, usePage} from '@inertiajs/inertia-react';
+import Swal from 'sweetalert2';
+import axios from "axios";
 
 function VeryfyEmail() {
     const [form, setForm] = useState({
-        'verification-link-sent': "",
+        'email': "",
       })
-
+    const auth = usePage().props;
     function handleChange(e) {
         const key = e.target.id;
         const value = e.target.value;
         setForm(form => ({
             ...form,
             [key]: value,
+            'email':auth.user.email,
         }));
       }
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        Inertia.post('verification.resend')
+  
+      const handleSubmit = async (e) => {
+        e.preventDefault()
+        const formData = new FormData();
+        formData.append("email", auth.user.email);
+        try {
+          // We will send formData object as a data to the API URL here.
+          const res = await axios.post("/resend", formData)
+          .then((res) => {
+            if(res.data.includes('300')){
+              Swal.fire({
+                        title: 'Resend Mail Successful',
+                        text:  'Please check your mailbox to active your account!',
+                        type: 'success',
+                           }).then(function() {
+                            window.location.reload(true);
+                        });	
+                           }
+          }).catch((error) => {
+              alert("Error")
+          });
+      } catch (error) {
+          console.log(error)
+      }
       }
       const errors = usePage().props.errors;
     return (

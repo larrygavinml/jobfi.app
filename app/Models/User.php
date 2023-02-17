@@ -29,6 +29,7 @@ class User extends Authenticatable implements MustVerifyEmail,Wallet
         'codeforinvite',
         'unlockedcoin',
         'walletaddress',
+        'email_verified_at',
         'cv_name'
     ];
 

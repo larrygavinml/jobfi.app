@@ -51,5 +51,5 @@ Route::group(['middleware' => 'auth', 'verified'], function() {
     Route::put('/profilePhotoUpdate', [profileController::class, 'updateProfilePhoto'])->name('profilePhotoUpdate');
     Route::delete('/profileDelete', [profileController::class, 'deleteProfile'])->name('profileDelete');
     Route::get('/verify/{token}', [VerifyController::class,'VerifyEmail'])->name('verify');
-    Route::post('/email/verify/resend', [VerifyController::class, 'resend'])->name('verification.resend');
+    Route::post('/resend', [VerifyController::class, 'resend'])->name('resend');
 });

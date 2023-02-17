@@ -31,8 +31,7 @@ const Applyjobpage  = memo(() => {
     formData.append("jobid", job.job.id);
     formData.append("cv", selectedFile);
     try {
- 
-      console.log(job.job.id);
+      
       // We will send formData object as a data to the API URL here.
       const response = await axios.post("/api/jobapply", formData, {
           headers: {"Content-Type": "multipart/form-data"}

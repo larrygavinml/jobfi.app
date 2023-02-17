@@ -38,13 +38,15 @@ class VerifyController extends Controller
 
     public function resend(Request $request)
     {
+        var_dump($request->email);
         $this->validate($request, [
             'email' => 'required|string|email|max:45',
         ]);
         $user = Auth::user();
         // These two lines below where the solution to my problem.
         $user->sendEmailVerificationNotification();
-
-        return Response::json(["status" => 'Verification e-mail send.', "email" => $request->input('email')], 201);
+        
+        return response() -> json(['status' => 300]);
+       
     }
 }
