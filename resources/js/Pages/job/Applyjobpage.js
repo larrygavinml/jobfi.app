@@ -1,43 +1,57 @@
-import React,{useState, useEffect, useRef} from 'react';
+import React,{memo, useState, useEffect, useRef} from 'react';
 import{usePage, useForm } from '@inertiajs/inertia-react';
 import {Inertia} from '@inertiajs/inertia';
 import Swal from 'sweetalert2';
+import axios from "axios";
 
-export function Applyjobpage() {
+const Applyjobpage  = memo(() => {
   const [nameForm, setNameForm] = useState()
   const [emailForm, setEmailForm] = useState()
-  const [cvfile, setCvFile] = useState()
   const initialName = useRef();
   const initialEmail = useRef();
-  const  formData = useRef(); 
-  const  cvfile  = useRef(null);
-  
+  const [selectedFile, setSelectedFile] = useState(null);
     const { data, setData, errors, post, progress } = useForm({
         userid: "",
         jobid: "",
         cv: null,
     });
-  const job = usePage().props;
   const auth = usePage().props;
-  const hashid = usePage().props;
-  console.log(job);
-  console.log(auth);
-  console.log(hashid);
+  const job = usePage().props;
+  function selectNewCV(e){
+    e.preventDefault();
+    setSelectedFile(e.target.files[0]);
+  }
 
-  function handleSubmit(e) {
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    Inertia.post('/userapply', {
-        hashid: job.hashid,
-        userid: auth.user.id,
-        jobid: job.id,
-        cv:  cv 
-    },{
-      onSuccess: () => {  Swal.fire({
-        title: 'Apply Success',
-        text:  'You have applied this job.Please wait for the',
-        type: 'success',
-           });	}
-    })
+    console.log(job);
+    const formData = new FormData();
+    formData.append("userid", auth.user.id);
+    formData.append("jobid", job.job.id);
+    formData.append("cv", selectedFile);
+    try {
+ 
+      console.log(job.job.id);
+      // We will send formData object as a data to the API URL here.
+      const response = await axios.post("/api/jobapply", formData, {
+          headers: {"Content-Type": "multipart/form-data"}
+      }).then((res) => {
+        if(res.data.status === 300){
+          Swal.fire({
+                    title: 'Applied Successful',
+                    text:  'Please be patient and wait for the HR department to contact you!',
+                    type: 'success',
+                       }).then(function() {
+                        window.location.reload(true);
+                    });	
+                       }
+      }).catch((error) => {
+          alert("Error")
+      });
+  } catch (error) {
+      console.log(error)
+  }
   }
 
   useEffect(() => {
@@ -147,6 +161,7 @@ export function Applyjobpage() {
           required
           name="cv"
           type="file"
+          onChange={selectNewCV}
           className="
             block
             w-full
@@ -206,7 +221,27 @@ export function Applyjobpage() {
           </div>
         </div>
       </div>
-      <div className="mb-6">
+
+      {
+         auth.userjob === "true"?
+         <div className="mb-6">
+        <button
+          className="
+            h-10
+            px-5
+            text-green-100
+            bg-green-500
+            rounded-lg
+            transition-colors
+            duration-150
+            focus:shadow-outline
+            hover:bg-green-700 "
+          disabled
+        >
+          You have applied this job
+        </button>
+      </div> 
+    : <div className="mb-6">
         <button
           type="submit"
           onClick={handleSubmit}
@@ -225,6 +260,7 @@ export function Applyjobpage() {
           Apply
         </button>
       </div>
+       }
       <div>
       </div>
     </form>

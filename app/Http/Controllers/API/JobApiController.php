@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\JobCollection;
 use App\Models\Job;
 use App\Models\User_Job;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
@@ -87,15 +88,16 @@ class JobApiController extends Controller
      */
     public function jobapply(Request $request)
     {   
-        var_dump($request->cv);
+      
         if($request->hasFile('cv')){
             $photo = $request->file('cv');
             $filename = $request->userid. '.' . $photo->getClientOriginalExtension();
 
-            //$this->deleteOldcv();
+            $this->deleteOldcv($request->userid);
 
             Storage::putFileAs('public/usercv', $photo, $filename );
-            auth()->user()->update([
+            $user = User::where('id','=',$request->userid)->first();
+            $user->update([
                 'cv_name' => $filename
             ]); 
             $userjob =  new User_Job;
@@ -115,10 +117,10 @@ class JobApiController extends Controller
     {
         //
     }
-    protected function deleteOldcv()
-    {
-        if(auth()->user()->cv_name)  {
-          Storage::delete('public/usercv/'.auth()->user()->cv_name );
+    protected function deleteOldcv($userid)
+    {   $user = User::where('id','=',$userid)->first(); 
+        if($user->cv_name)  {
+          Storage::delete('public/usercv/'.$user->cv_name );
         }
     }
     /**

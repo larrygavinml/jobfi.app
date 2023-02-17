@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\JobCollection;
 use App\Models\Job;
 use App\Models\User_Job;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
@@ -73,9 +74,22 @@ class JobController extends Controller
     {
         //
         $job = Job::where('hashid',$hashid)->first();
-        return Inertia::render('job/apply', [
-            'job' => $job,
-        ]);
+        $userjobid = User_Job::where('job_id',$job->id)->pluck('user_id');
+        $loginuser=auth()->user(); 
+        if($loginuser::whereIn('id', $userjobid )->exists())
+        {
+            return Inertia::render('job/apply', [
+                'job' => $job,
+                'userjob' => "true"
+            ]);
+        } 
+        else{
+            return Inertia::render('job/apply', [
+                'job' => $job,
+                'userjob' => "no"
+            ]);
+        }
+       
     }
       /**
      * Display the specified resource.
