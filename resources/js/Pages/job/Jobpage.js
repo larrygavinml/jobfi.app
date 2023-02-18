@@ -20,7 +20,7 @@ const Jobpage = memo(({job}) => {
       </div>
 
       <div className="w-full py-20">
-        <div className="ml-96">
+        <div className="lg:ml-96 mx-2">
           <div className="flex justify-start items-center text-3xl font-bold block">
             {job.title}
             <span className="mt-2 ml-20 h-8 px-2 leading-8 rounded text-xs text-white bg-blue-500" >{job.worktype}</span>
