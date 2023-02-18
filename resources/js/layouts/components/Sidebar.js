@@ -1,10 +1,10 @@
-import { InertiaLink } from '@inertiajs/inertia-react';
+import { InertiaLink, usePage } from '@inertiajs/inertia-react';
 import React, {useEffect, useRef} from 'react'
 
 function Sidebar({sidebarOpen, setSidebarOpen}) {
         const trigger = useRef(null);
         const sidebar = useRef(null);
-
+        const { user } = usePage().props;
         // close on click outside
         useEffect(() => {
             const clickHandler = ({ target }) => {
@@ -89,7 +89,7 @@ function Sidebar({sidebarOpen, setSidebarOpen}) {
             </li>
           {/*jobs 公司job有哪些人应聘*/ }
              <li className="px-3 py-2 rounded-sm mb-0.5">
-              <InertiaLink href="#" className="block text-gray-200 hover:text-white">
+              <InertiaLink  href={route('userjobs', user.id)} className="block text-gray-200 hover:text-white">
                 <div className="flex items-center flex-grow">
                 <i className="w-6 h-6 mr-1 fa-solid fa-briefcase"></i>
                       <span className="text-sm font-medium">Jobs</span>

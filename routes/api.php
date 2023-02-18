@@ -18,3 +18,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::post('jobapply',[App\Http\Controllers\API\JobApiController::class, 'jobapply']);
+Route::post('quicker',[App\Http\Controllers\API\JobApiController::class, 'quicker']);

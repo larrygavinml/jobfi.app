@@ -107,6 +107,40 @@ class JobApiController extends Controller
             return response() -> json(['status' => 300]);
         }
     }
+      /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Job  $job
+     * @return \Illuminate\Http\Response
+     */
+    public function quicker(Request $request)
+    {   
+            
+        $user = User::where('id',$request->userid)->first();
+        if($user->initbalance > 200)
+        {
+            $user->initbalance -=200;
+            $user->save(); 
+            $userjob = User_Job::where('user_id',$user->id)->where('job_id',$request->jobid)->first();
+            $userjob->quicker +=1;
+            $userjob->save(); 
+            return response() -> json(['status' => 300]);
+        }
+        elseif($user->unlockedcoin > 200)
+        {
+            $user->unlockedcoin -=(200 - $user->initbalance);
+            $user->initbalance==0; 
+            $user->save(); 
+            $userjob = User_Job::where('user_id',$user->id)->where('job_id',$request->jobid)->first();
+            $userjob->quicker +=1;
+            $userjob->save(); 
+            return response() -> json(['status' => 400]);
+        }
+        else{
+            return response() -> json(['status' => 500]); 
+        }
+       
+    }
     /**
      * Show the form for editing the specified resource.
      *

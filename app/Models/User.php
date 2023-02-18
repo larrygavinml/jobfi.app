@@ -46,7 +46,7 @@ class User extends Authenticatable implements MustVerifyEmail,Wallet
     /**User have mutiple jobs */
     public function jobs(){
 
-        return $this->belongsToMany(Job::class, 'user_job','user_id','job_id');
+        return $this->belongsToMany(Job::class, 'user_jobs','user_id','job_id')->withPivot('quicker')->withTimestamps();
         
         }
     /**

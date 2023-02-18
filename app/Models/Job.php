@@ -35,6 +35,6 @@ class Job extends Model
     }
     /**User with mutiple jobs */
     public function users(){
-        return $this->belongsToMany(User::class, 'user_job','job_id','user_id');
+        return $this->belongsToMany(User::class, 'user_job','job_id','user_id')->withTimestamps();
     }
 }

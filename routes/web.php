@@ -42,7 +42,9 @@ Route::inertia('/test', 'Test');
 
 Route::group(['middleware' => 'auth', 'verified'], function() {
     Route::inertia('/home', 'Home')->middleware('verified');
-
+    
+    Route::get('/userjobs/{userid}',[JobController::class, 'userjobs'])
+    ->name('userjobs');
     Route::get('/profile', [profileController::class, 'index'])->name('profile');
     Route::put('/userwallet',[profileController::class, 'userwallet'])->name('userwallet');
     Route::put('/withdrawcoin',[profileController::class, 'withdrawcoin'])->name('withdrawcoin');

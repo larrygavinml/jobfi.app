@@ -64,6 +64,29 @@ class JobController extends Controller
         ]);
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Job  $job
+     * @return \Illuminate\Http\Response
+     */
+    public function userjobs($userid)
+    {
+        //
+        $jobs = Auth::user()->jobs;
+        if($jobs->count() > 0)
+        {
+        return Inertia::render('userjob/Index', [
+            'jobs' => $jobs,
+        ]);
+        }
+        else{
+            return Inertia::render('userjob/Index', [
+                'jobs' => "nojobs",
+            ]); 
+        }
+
+    }
       /**
      * Display the specified resource.
      *
