@@ -10,7 +10,7 @@ const UserJobpage = memo(({ jobs}) => {
 <tr>
   <th className="bg-blue-100 border text-left px-8 py-4">Job Title</th>
   <th className="bg-blue-100 border text-left px-8 py-4">Applied Time</th>
-  <th className="bg-blue-100 border text-left px-8 py-4">Request Response</th>
+  <th className="bg-blue-100 border text-left px-8 py-4">Fast Pass</th>
 </tr>
 </thead>
 <tbody>

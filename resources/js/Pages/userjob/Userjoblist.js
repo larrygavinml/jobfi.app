@@ -53,10 +53,12 @@ const Userjoblist = memo(({ job }) => {
     <td className="border px-8 py-4">{job.title}</td>
     <td  className="border px-8 py-4">{moment(job.pivot.created_at).format('YYYY-MM-DD HH:mm:ss')}</td>
     <td  className="border px-8 py-4">
-    < button onClick = {
+    < button
+        className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" 
+        onClick = {
             () => handleSubmit(job.id)
           } >
-      Cost 200 BBB Quicker
+      Cost 200 BBB Requst
       </button>
       </td>
   </tr>
