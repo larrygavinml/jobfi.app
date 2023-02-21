@@ -7,13 +7,14 @@ import Pagination from '../Shared/Pagination';
 
 
 export function Landing(props) {
-    const { jobs,firms } = usePage().props;
-    // console.log('jobs',{jobs});
-    // console.log('firms',{firms});
-    const {
-      data,
-      links,
-    } = firms; 
+  const { jobs,firms } = usePage().props;
+  // console.log('jobs',{jobs});
+  // console.log('firms',{firms});
+  const {
+    data,
+    links,
+  } = firms; 
+
   return (
     <main>
        <div className="relative pt-16 pb-32 flex content-center items-center justify-center"

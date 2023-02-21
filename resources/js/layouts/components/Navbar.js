@@ -2,8 +2,24 @@ import React from "react";
 import { InertiaLink, usePage } from '@inertiajs/inertia-react';
 import IframeResizer from 'iframe-resizer-react';
 
+import Breadcrumbs from '@material-ui/core/Breadcrumbs'
+import Link from '@material-ui/core/Link'
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 
 export function Navbar(props) {
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#ffffff'
+      }
+    },
+    typography: {
+      fontSize: 13,
+    },
+  });
+
+  console.log('lg',props.transparent)
+
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   const { user } = usePage().props;
   const ref = React.useRef();
@@ -11,6 +27,11 @@ export function Navbar(props) {
   const onLoad = () => {
     setHeight(ref.current.contentWindow.document.body.scrollHeight + "px");
   };
+
+  function handleClick() {
+    console.log('handleClick')
+  }
+
   return (
     <nav
       className={
@@ -19,7 +40,7 @@ export function Navbar(props) {
           : "relative shadow-lg bg-white shadow-lg") +
         " flex flex-wrap items-center justify-between px-2 py-3 "
       }
-    >
+    > 
       <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
         <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
           <a
@@ -31,6 +52,7 @@ export function Navbar(props) {
           >
             JobFi.eth
           </a>
+
           <button
             className="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
             type="button"
@@ -44,6 +66,21 @@ export function Navbar(props) {
             ></i>
           </button>
         </div>
+        <div className={`uppercase ${props.hiddenBreadcrumbs ? 'hidden' : ''}`}>
+            <ThemeProvider theme={theme}>
+              <Breadcrumbs aria-label="breadcrumb">
+                <Link color="primary" href="/" variant="inherit" onClick={handleClick}>
+                  Start
+                </Link>
+                <Link color="primary" href="/" onClick={handleClick}>
+                  Job
+                </Link>
+                <Link color="primary" href="/" onClick={handleClick}>
+                  Post
+                </Link>
+              </Breadcrumbs>
+            </ThemeProvider>
+          </div>
         <div
           className={
             "lg:flex flex-grow items-center bg-white lg:bg-transparent lg:shadow-none" +
