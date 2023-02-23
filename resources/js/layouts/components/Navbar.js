@@ -10,11 +10,11 @@ export function Navbar(props) {
   const theme = createTheme({
     palette: {
       primary: {
-        main: '#ffffff'
+        main: '#333'
       }
     },
     typography: {
-      fontSize: 13,
+      fontSize: 10,
     },
   });
 
@@ -66,21 +66,6 @@ export function Navbar(props) {
             ></i>
           </button>
         </div>
-        <div className={`uppercase ${props.hiddenBreadcrumbs ? 'hidden' : ''}`}>
-            <ThemeProvider theme={theme}>
-              <Breadcrumbs aria-label="breadcrumb">
-                <Link color="primary" href="/" variant="inherit" onClick={handleClick}>
-                  Start
-                </Link>
-                <Link color="primary" href="/" onClick={handleClick}>
-                  Job
-                </Link>
-                <Link color="primary" href="/" onClick={handleClick}>
-                  Post
-                </Link>
-              </Breadcrumbs>
-            </ThemeProvider>
-          </div>
         <div
           className={
             "lg:flex flex-grow items-center bg-white lg:bg-transparent lg:shadow-none" +
@@ -135,6 +120,22 @@ export function Navbar(props) {
 
           </ul>
         </div>
+      </div>
+
+      <div className={`lg:mt-36 lg:ml-2 mt-40 uppercase ${props.hiddenBreadcrumbs ? 'hidden' : ''}`}>
+        <ThemeProvider theme={theme}>
+          <Breadcrumbs aria-label="breadcrumb">
+            <Link color="primary" href="/" variant="inherit" onClick={handleClick}>
+              Start
+            </Link>
+            <Link color="primary" href="/" onClick={handleClick}>
+              Job
+            </Link>
+            <Link color="primary" href="/" onClick={handleClick}>
+              Post
+            </Link>
+          </Breadcrumbs>
+        </ThemeProvider>
       </div>
     </nav>
   );
