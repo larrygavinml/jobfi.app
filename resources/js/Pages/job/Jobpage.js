@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
-import { InertiaLink } from '@inertiajs/inertia-react';
-import{usePage} from '@inertiajs/inertia-react';
+import { Link } from '@inertiajs/react';
+import{usePage} from '@inertiajs/react';
 
 const Jobpage = memo(({job}) => {
   const { user } = usePage().props;
@@ -31,8 +31,8 @@ const Jobpage = memo(({job}) => {
           <div className="max-w-2xl text-lg my-2">{job.description}</div>
           <button className="mt-5 rounded-md text-white text-base font-semibold bg-green-500 hover:bg-green-700">{
             user?
-            <InertiaLink tabIndex="-1"  href={route('job.apply', job.hashid )} className="flex items-center px-14 py-3"> Apply </InertiaLink>:
-            <InertiaLink href="/login" className="flex items-center px-14 py-3">Please Login First</InertiaLink>
+            <Link tabIndex="-1"  href={route('job.apply', job.hashid )} className="flex items-center px-14 py-3"> Apply </Link>:
+            <Link href="/login" className="flex items-center px-14 py-3">Please Login First</Link>
           }
           </button>
         </div>

@@ -1,6 +1,6 @@
 import React,{useState, useEffect, useRef} from 'react';
-import{usePage} from '@inertiajs/inertia-react';
-import {Inertia} from '@inertiajs/inertia';
+import{usePage} from '@inertiajs/react';
+import { router } from '@inertiajs/react';
 
 function UpdateWallet() {
   const [walletaddressForm, setwalletaddressForm] = useState()
@@ -12,7 +12,7 @@ function UpdateWallet() {
 
   function handleSubmit(e) {
     e.preventDefault()
-    Inertia.post('userwallet', {
+    router.post('userwallet', {
         _method: 'put',
         walletaddress: walletaddressForm
     })

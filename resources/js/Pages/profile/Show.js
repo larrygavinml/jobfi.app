@@ -7,7 +7,7 @@ import Layout from '@/layouts/Layout'
 import UpdateProfilePhoto from './UpdateProfilePhoto'
 import UserWallet from './UserWallet'
 import Updatewallet from './Updatewallet'
-import {usePage} from '@inertiajs/inertia-react'
+import {usePage} from '@inertiajs/react'
 
 function Show() {
   const auth = usePage().props;

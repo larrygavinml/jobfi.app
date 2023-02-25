@@ -1,21 +1,15 @@
 require('./bootstrap');
 
-import { App } from '@inertiajs/inertia-react'
+import { createInertiaApp } from '@inertiajs/react'
+import { createRoot } from 'react-dom/client'
 import React from 'react'
-import { render } from 'react-dom'
-import { InertiaProgress } from '@inertiajs/progress'
 import '@fortawesome/fontawesome-free/css/all.css';
 import 'flowbite';
 
 
-const el = document.getElementById('app');
-
-render(
-  <App
-    initialPage={JSON.parse(el.dataset.page)}
-    resolveComponent={name => require(`./Pages/${name}`).default}
-  />,
-  el
-);
-
-InertiaProgress.init({ color: '#4B5563' });
+createInertiaApp({
+  resolve: name => require(`./Pages/${name}`),
+  setup({ el, App, props }) {
+    createRoot(el).render(<App {...props} />)
+  },
+})

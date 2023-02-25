@@ -30,7 +30,8 @@ class User extends Authenticatable implements MustVerifyEmail,Wallet
         'unlockedcoin',
         'walletaddress',
         'email_verified_at',
-        'cv_name'
+        'cv_name',
+        'firm_id'
     ];
 
     /**

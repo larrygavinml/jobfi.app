@@ -1,5 +1,5 @@
 import React from "react";
-import { InertiaLink, usePage } from '@inertiajs/inertia-react';
+import { Link, usePage } from '@inertiajs/react';
 import IframeResizer from 'iframe-resizer-react';
 
 
@@ -70,9 +70,9 @@ export function Navbar(props) {
                 <i className="fa fa-sign-in"></i> 
                 {
                             user ?
-                            <InertiaLink href="/home" className="text-sm text-gray-700 underline">Home</InertiaLink>
+                            <Link href="/home" className="text-sm text-gray-700 underline">Home</Link>
                             :
-                            <InertiaLink href="/login" className="text-sm text-gray-700 underline">Login</InertiaLink>
+                            <Link href="/login" className="text-sm text-gray-700 underline">Login</Link>
                 }
               </button>
             </li>
@@ -90,7 +90,7 @@ export function Navbar(props) {
               >
                 <i className="fa fa-registered"></i> 
                {
-                <InertiaLink href="/register" className="ml-4 text-sm text-gray-700 underline">Reg</InertiaLink>
+                <Link href="/register" className="ml-4 text-sm text-gray-700 underline">Reg</Link>
                 
                 }
               </button>

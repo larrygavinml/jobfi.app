@@ -1,11 +1,11 @@
 import React, { memo } from 'react'
-import { InertiaLink } from '@inertiajs/inertia-react';
+import { Link } from '@inertiajs/react';
 
 const PageLink = memo(({ active, label, url }) => {
   return (
-    <InertiaLink className={`mx-2 text-gray-600 text-sm ${active ? 'border-{side}-2 border-b border-gray-600' : ''}`} href={url}>
+    <Link className={`mx-2 text-gray-600 text-sm ${active ? 'border-{side}-2 border-b border-gray-600' : ''}`} href={url}>
       <span dangerouslySetInnerHTML={{ __html: label }}></span>
-    </InertiaLink>
+    </Link>
   );
 })
 

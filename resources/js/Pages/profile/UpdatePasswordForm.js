@@ -1,6 +1,6 @@
 import React, {useState, useRef} from 'react';
 import{Inertia} from '@inertiajs/inertia';
-import {usePage} from '@inertiajs/inertia-react';
+import {usePage} from '@inertiajs/react';
 
 
 function UpdatePasswordForm() {
@@ -15,7 +15,7 @@ function UpdatePasswordForm() {
 
   function handleSubmit(e){
     e.preventDefault()
-    Inertia.put('user/password', {
+    router.post('user/password', {
       _method: 'put',
       current_password: currentPasswordForm,
       password: passwordForm,

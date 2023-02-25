@@ -19,12 +19,9 @@ class JobController extends Controller
     public function index()
     {
         //
+        $jobs = Job::orderBy('id', 'DESC')->paginate();
         return Inertia::render('Joblist', [
-                'jobs' => new JobCollection(
-                Job::orderBytitle()
-                    ->paginate()
-                    ->appends(Request::all())
-            ),
+                'jobs' => $jobs,
         ]);
     }
 
@@ -87,6 +84,62 @@ class JobController extends Controller
         }
 
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Job  $job
+     * @return \Illuminate\Http\Response
+     */
+    public function firmjobs($userid)
+    {
+        //
+        $jobs = Auth::user()->jobs;
+        if($jobs->count() > 0)
+        {
+        return Inertia::render('firmjob/Index', [
+            'jobs' => $jobs,
+        ]);
+        }
+        else{
+            return Inertia::render('firmjob/Index', [
+                'jobs' => "nojobs",
+            ]); 
+        }
+
+    }
+
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Job  $job
+     * @return \Illuminate\Http\Response
+     */
+    public function postjob()
+    {
+        $jobs = Auth::user()->jobs; 
+        return Inertia::render('firmjob/post', [
+            'jobs' => $jobs,
+        ]);
+       
+
+    }
+
+       /**
+     * Display the job edit page specified resource.
+     *
+     * @param  \App\Models\Job  $job
+     * @return \Illuminate\Http\Response
+     */
+    public function jobedit(Job $job)
+    {
+        //
+        return Inertia::render('firmjob/Edit', [
+            'job' => $job
+        ]);
+    }
+
       /**
      * Display the specified resource.
      *
@@ -173,8 +226,12 @@ class JobController extends Controller
      * @param  \App\Models\Job  $job
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Job $job)
+    public function jobDelete($id)
     {
         //
+        Job::find($id)->delete();
+        return back()->with('flash', [
+            'message' => 'success',
+        ]);
     }
 }

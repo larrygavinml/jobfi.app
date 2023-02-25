@@ -1,7 +1,7 @@
 import React, {useState,useRef} from 'react'
 import Modal from './components/Modal'
 import { Inertia } from '@inertiajs/inertia';
-import {usePage} from '@inertiajs/inertia-react';
+import {usePage} from '@inertiajs/react';
 
 function DeleteUserForm() {
   const [modal, setModal] = useState(false);
@@ -17,7 +17,7 @@ function DeleteUserForm() {
 
   function deleteUser(e){
     e.preventDefault()
-    Inertia.post('/profileDelete', {
+    router.post('/profileDelete', {
       _method: 'delete',
       password: passwordForm,
       preserveScroll: true,

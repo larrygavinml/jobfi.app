@@ -1,5 +1,5 @@
 import React from 'react'
-import { InertiaLink, usePage } from '@inertiajs/inertia-react'
+import { Link, usePage } from '@inertiajs/react'
 import PropTypes from 'prop-types'
 import { Navbar }  from "../layouts/components/Navbar";
 import { Footer } from "../layouts/components/Footer";

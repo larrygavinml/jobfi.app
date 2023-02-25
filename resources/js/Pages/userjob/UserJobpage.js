@@ -1,6 +1,6 @@
 import React,{memo, setState} from "react";
 import {useDefaultPhoto} from '@/hooks/constants';
-import { InertiaLink } from '@inertiajs/inertia-react';
+import { Link } from '@inertiajs/react';
 import Joblist from './Userjoblist';
 const UserJobpage = memo(({ jobs}) => {
   return (

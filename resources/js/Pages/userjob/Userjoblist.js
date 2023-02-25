@@ -1,6 +1,6 @@
 import React,{memo, setState} from "react";
 import {useDefaultPhoto} from '@/hooks/constants';
-import { InertiaLink,usePage } from '@inertiajs/inertia-react';
+import { Link,usePage } from '@inertiajs/react';
 import moment from "moment";
 import axios from "axios";
 import Swal from 'sweetalert2';

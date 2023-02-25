@@ -1,6 +1,6 @@
 import React,{useState, useEffect, useRef} from 'react';
-import{usePage} from '@inertiajs/inertia-react';
-import {Inertia} from '@inertiajs/inertia';
+import{usePage} from '@inertiajs/react';
+import { router } from '@inertiajs/react';
 
 function UserWallet() {
   const [balanceForm, setbalanceForm] = useState()
@@ -12,7 +12,7 @@ function UserWallet() {
 
   function handleSubmit(e) {
     e.preventDefault()
-    Inertia.post('withdrawcoin', {
+    router.post('withdrawcoin', {
         _method: 'put',
         balance: balanceIntForm
     })

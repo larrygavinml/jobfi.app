@@ -1,8 +1,6 @@
 import React from "react";
 import Jobslist from "./Jobslist";
-
-import {Inertia} from '@inertiajs/inertia';
-import { InertiaLink, usePage } from '@inertiajs/inertia-react';
+import { Link, usePage } from '@inertiajs/react'
 import Pagination from '../Shared/Pagination';
 
 

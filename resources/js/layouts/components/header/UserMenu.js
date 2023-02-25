@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { InertiaLink, usePage } from '@inertiajs/inertia-react';
-import { Inertia } from '@inertiajs/inertia';
+import { Link, usePage } from '@inertiajs/react'
+import { router } from '@inertiajs/react';
 import { useDefaultPhoto } from '@/hooks/constants';
 
 function UserMenu() {
@@ -33,7 +33,7 @@ function UserMenu() {
         //log out
         const logout = (e) => {
           e.preventDefault();
-          Inertia.post('/logout');
+          router.post('/logout');
         };
 
     return (
@@ -72,12 +72,12 @@ function UserMenu() {
                 </div>
                 <ul>
                   <li>
-                    <InertiaLink
+                    <Link
                       className="flex items-center px-3 py-1 text-sm font-medium text-indigo-500 hover:text-indigo-600"
                       href="/profile"
                     >
                       Profile
-                    </InertiaLink>
+                    </Link>
                   </li>
                   <li>
                     <form onSubmit={logout}>

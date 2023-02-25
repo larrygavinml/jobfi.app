@@ -1,6 +1,5 @@
 import React,{memo, useState, useEffect, useRef} from 'react';
-import{usePage, useForm } from '@inertiajs/inertia-react';
-import {Inertia} from '@inertiajs/inertia';
+import{usePage, useForm } from '@inertiajs/react';
 import Swal from 'sweetalert2';
 import axios from "axios";
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { InertiaLink, usePage } from '@inertiajs/inertia-react';
+import { Link, usePage } from '@inertiajs/react'
 import Jobpage from "./UserJobpage";
 import Layout from '../../layouts/Layout';
 

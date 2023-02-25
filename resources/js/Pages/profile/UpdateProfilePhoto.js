@@ -1,6 +1,6 @@
 import React,{useState, useRef} from 'react'
-import{usePage} from '@inertiajs/inertia-react';
-import {Inertia} from '@inertiajs/inertia';
+import{usePage} from '@inertiajs/react';
+import { router } from '@inertiajs/react';
 import {useDefaultPhoto} from '@/hooks/constants';
 
 function UpdateProfilePhoto() {
@@ -44,7 +44,7 @@ function UpdateProfilePhoto() {
       photoForm.current = photo.current.files[0]
     }
 
-    Inertia.post('/profilePhotoUpdate', {
+    router.post('/profilePhotoUpdate', {
       _method: 'put',
       photo: photoForm.current,
       forceFormData: true,

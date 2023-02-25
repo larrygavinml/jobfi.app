@@ -1,6 +1,6 @@
 import React,{useState, useEffect, useRef} from 'react';
-import {usePage} from '@inertiajs/inertia-react';
-import {Inertia} from '@inertiajs/inertia';
+import {usePage} from '@inertiajs/react';
+import { router } from '@inertiajs/react';
 
 function UpdateProfileInformationForm() {
   const [nameForm, setNameForm] = useState()
@@ -14,7 +14,7 @@ function UpdateProfileInformationForm() {
 
   function handleSubmit(e) {
     e.preventDefault()
-    Inertia.post('user/profile-information', {
+    router.post('user/profile-information', {
         _method: 'put',
         name: nameForm,
         email: emailForm

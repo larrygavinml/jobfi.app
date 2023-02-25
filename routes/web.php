@@ -33,6 +33,8 @@ Route::get('/apply/{hashid}', [JobController::class, 'apply'])
 Route::post('/userapply', [JobController::class, 'userapply'])
     ->name('userapply');    
 /** route for firms */
+Route::get('firms',[JobController::class, 'index'])
+    ->name('firms');
 Route::get('/firm/{hashid}', [FirmController::class, 'show'])
     ->name('firm.show');
 Route::get('/post/{hashid}', [FirmController::class, 'post'])
@@ -45,6 +47,16 @@ Route::group(['middleware' => 'auth', 'verified'], function() {
     
     Route::get('/userjobs/{userid}',[JobController::class, 'userjobs'])
     ->name('userjobs');
+    /** add firm job logic for a firm add jobs */
+    Route::get('/firmjobs/{userid}',[JobController::class, 'firmjobs'])
+    ->name('firmjobs');
+    /**job edit page */
+    Route::get('/jobedit/{job}',[JobController::class, 'jobedit'])
+    ->name('jobedit');
+    Route::get('/postjob',[JobController::class, 'postjob'])
+    ->name('postjob');
+    Route::delete('/jobDelete/{id}', [JobController::class, 'jobDelete'])->name('jobDelete');
+ 
     Route::get('/profile', [profileController::class, 'index'])->name('profile');
     Route::put('/userwallet',[profileController::class, 'userwallet'])->name('userwallet');
     Route::put('/withdrawcoin',[profileController::class, 'withdrawcoin'])->name('withdrawcoin');

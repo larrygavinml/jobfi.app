@@ -1,7 +1,7 @@
 import React,{memo, setState} from "react";
 import Listitem from "./Listitem";
 import {useDefaultPhoto} from '@/hooks/constants';
-import { InertiaLink } from '@inertiajs/inertia-react';
+import { Link } from '@inertiajs/react';
 
 const Jobslist = memo(({ firm }) => {
   return (
@@ -13,13 +13,13 @@ const Jobslist = memo(({ firm }) => {
 
          </div>
         <h4 className="lg:ml-60 my-2 ml-0 lg:text-3xl text-2xl text-left text-bold">
-        <InertiaLink
+        <Link
                       tabIndex="-1"
                       href={route('firm.show', firm.hashid)}
                       className=""
                     >
                       {firm.title}
-                    </InertiaLink>
+                    </Link>
         </h4>
         </div>
                  {firm.jobs.map((data) => (

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller; 
-use App\Http\Resources\JobCollection;
 use App\Models\Job;
 use App\Models\User_Job;
 use App\Models\User;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
@@ -107,7 +107,60 @@ class JobApiController extends Controller
             return response() -> json(['status' => 300]);
         }
     }
+   
       /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Job  $job
+     * @return \Illuminate\Http\Response
+     */
+    public function jobpost(Request $request)
+    {       
+            $user = User::where('id','=',$request->userid)->first(); 
+            $firmid = $user->firm_id;
+            $newjob = new Job;
+            $newjob->title = $request->title;
+            $newjob->jobtype = $request->jobtype; 
+            $newjob->worklocation = $request->worklocation;
+            $newjob->worktype = $request->worktype;
+            $newjob->description = $request->description;
+            $newjob->salaryrange = $request->salaryrange;
+            $newjob->salarytype = $request->salarytype;
+            $newjob->firm_id = $firmid;
+            $newjob->save();
+            $userjob = new User_Job;
+            $userjob->user_id = $user->id;
+            $userjob->job_id = $newjob->id; 
+            $userjob->save(); 
+            
+            return response() -> json(['status' => 300]);
+    }
+   
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
+    public function jobupdate($id, Request $request)
+    {   
+        $user = User::where('id',$request->userid)->first();
+        Validator::make($request->all(), [
+            'title' => ['required'],
+            'description' => ['required'],
+        ])->validate();
+    
+        $editjob = Job::find($id);
+        $editjob->title = $request->title;
+        $editjob->jobtype = $request->jobtype; 
+        $editjob->worklocation = $request->worklocation;
+        $editjob->worktype = $request->worktype;
+        $editjob->description = $request->description;
+        $editjob->salaryrange = $request->salaryrange;
+        $editjob->salarytype = $request->salarytype;
+        $editjob->save();
+        return response() -> json(['status' => 300]);
+    }
+     /**
      * Display the specified resource.
      *
      * @param  \App\Models\Job  $job

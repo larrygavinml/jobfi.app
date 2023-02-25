@@ -1,4 +1,4 @@
-import { InertiaLink, usePage } from '@inertiajs/inertia-react';
+import { Link, usePage } from '@inertiajs/react'
 import React, {useEffect, useRef} from 'react'
 
 function Sidebar({sidebarOpen, setSidebarOpen}) {
@@ -54,7 +54,7 @@ function Sidebar({sidebarOpen, setSidebarOpen}) {
             </svg>
           </button>
           {/* Logo */}
-          <InertiaLink href="/home" className="block">
+          <Link href="/home" className="block">
             <svg width="32" height="32" viewBox="0 0 32 32">
               <defs>
                 <linearGradient x1="28.538%" y1="20.229%" x2="100%" y2="108.156%" id="logo-a">
@@ -71,7 +71,7 @@ function Sidebar({sidebarOpen, setSidebarOpen}) {
               <path d="M7.404 2.503l18.339 26.19A15.93 15.93 0 0116 32C7.163 32 0 24.837 0 16 0 10.327 2.952 5.344 7.404 2.503z" fill="url(#logo-a)" />
               <path d="M2.223 24.14L29.777 7.86A15.926 15.926 0 0132 16c0 8.837-7.163 16-16 16-5.864 0-10.991-3.154-13.777-7.86z" fill="url(#logo-b)" />
             </svg>
-          </InertiaLink>
+          </Link>
         </div>
 
         {/* Links */}
@@ -80,30 +80,30 @@ function Sidebar({sidebarOpen, setSidebarOpen}) {
           <ul className="mt-3">
             {/* Dashboard */}
             <li className="px-3 py-2 rounded-sm mb-0.5">
-              <InertiaLink href="/home" className="block text-gray-200 hover:text-white">
+              <Link href="/home" className="block text-gray-200 hover:text-white">
                 <div className="flex items-center flex-grow">
                     <svg className="w-6 h-6 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" /></svg>
                     <span className="text-sm font-medium">Home</span>
                 </div>
-              </InertiaLink>
+              </Link>
             </li>
           {/*jobs 公司job有哪些人应聘*/ }
              <li className="px-3 py-2 rounded-sm mb-0.5">
-              <InertiaLink  href={route('userjobs', user.id)} className="block text-gray-200 hover:text-white">
+              <Link  href={route('userjobs', user.id)} className="block text-gray-200 hover:text-white">
                 <div className="flex items-center flex-grow">
                 <i className="w-6 h-6 mr-1 fa-solid fa-briefcase"></i>
                       <span className="text-sm font-medium">Jobs</span>
                 </div>
-              </InertiaLink>
+              </Link>
             </li>
           {/*Company 用户应聘公司信息*/ }
                <li className="px-3 py-2 rounded-sm mb-0.5">
-              <InertiaLink href="#" className="block text-gray-200 hover:text-white">
+              <Link  href={route('firmjobs', user.id)}  className="block text-gray-200 hover:text-white">
                 <div className="flex items-center flex-grow">
                 <i className="w-6 h-6 mr-1 fa-solid fa-vault"></i>
                       <span className="text-sm font-medium">Firms</span>
                 </div>
-              </InertiaLink>
+              </Link>
             </li>
           </ul>
         </div>
