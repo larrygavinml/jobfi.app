@@ -2,8 +2,26 @@ import React from "react";
 import { Link, usePage } from '@inertiajs/react';
 import IframeResizer from 'iframe-resizer-react';
 
+import Breadcrumbs from '@material-ui/core/Breadcrumbs'
+import LinkMaterial from '@material-ui/core/Link'
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 
 export function Navbar(props) {
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#333'
+      }
+    },
+    typography: {
+      fontSize: 10,
+    },
+  });
+
+  function handleClick() {
+    console.log('handleClick')
+  }
+
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   const { user } = usePage().props;
   const ref = React.useRef();
@@ -98,6 +116,22 @@ export function Navbar(props) {
 
           </ul>
         </div>
+      </div>
+
+      <div className={`lg:mt-36 lg:ml-2 mt-40 uppercase ${props.hiddenBreadcrumbs ? 'hidden' : ''}`}>
+        <ThemeProvider theme={theme}>
+          <Breadcrumbs aria-label="breadcrumb">
+            <LinkMaterial color="primary" href="/" variant="inherit" onClick={handleClick}>
+              Start
+            </LinkMaterial>
+            <LinkMaterial color="primary" href="/" onClick={handleClick}>
+              Job
+            </LinkMaterial>
+            <LinkMaterial color="primary" href="/" onClick={handleClick}>
+              Post
+            </LinkMaterial>
+          </Breadcrumbs>
+        </ThemeProvider>
       </div>
     </nav>
   );
