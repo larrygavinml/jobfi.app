@@ -8,7 +8,7 @@ import { Landing } from "./Landing";
 function Welcome({canLogin, canRegister, laravelVersion, phpVersion}) {
     return (
         <div>
-            <Navbar transparent />
+            <Navbar transparent hiddenBreadcrumbs />
             <Landing/>           
             <Footer />
         </div>

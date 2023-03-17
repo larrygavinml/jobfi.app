@@ -4,6 +4,7 @@ use App\Http\Controllers\publicControllers\profileController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\FirmController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\FirmMgrController;
 use App\Http\Controllers\Web3LoginController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
@@ -24,7 +25,7 @@ use Inertia\Inertia;
 Route::get('/', [HomeController::class, 'index']);
 
 /** route for jobs */
-Route::get('jobs',[JobController::class, 'index'])
+Route::get('/jobs',[JobController::class, 'index'])
     ->name('jobs');
 Route::get('/job/{hashid}', [JobController::class, 'show'])
     ->name('job.show');
@@ -44,7 +45,14 @@ Route::inertia('/test', 'Test');
 
 Route::group(['middleware' => 'auth', 'verified'], function() {
     Route::inertia('/home', 'Home')->middleware('verified');
-    
+    Route::resource('firmmgr', FirmMgrController::class); 
+    Route::get('/firmedit/{firm}',[FirmMgrController::class, 'edit'])
+    ->name('firmedit');
+    Route::put('/firmupdate', [FirmMgrController::class, 'update'])->name('firmupdate');
+
+    Route::post('/firmcreate', [FirmMgrController::class, 'store'])
+    ->name('firmcreate');  
+
     Route::get('/userjobs/{userid}',[JobController::class, 'userjobs'])
     ->name('userjobs');
     /** add firm job logic for a firm add jobs */

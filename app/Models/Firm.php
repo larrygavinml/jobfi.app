@@ -12,6 +12,15 @@ use Staudenmeir\EloquentEagerLimit\HasEagerLimit;
 class Firm extends Model
 {
     use HasFactory, HasEagerLimit;
+    protected $fillable = [
+        'title',
+        'purpose',
+        'description',
+        'sitepage',
+        'hashid', 
+    ];
+
+
     /***
      * firm types 
      */

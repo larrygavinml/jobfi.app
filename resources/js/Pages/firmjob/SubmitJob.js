@@ -12,6 +12,7 @@ const SubmitJob  = memo((user) => {
     salaryrange:"Negotiable",
     salarytype:"Cash",
     userid:"",
+    firmid:"",
   })
   const auth = usePage().props;
   function handleChange(e) {
@@ -24,16 +25,19 @@ const SubmitJob  = memo((user) => {
   }
 
   const handleSubmit = async (e) => {
-   
-    console.log(auth.user.id);
     const formData = new FormData();
     formData.append("userid", auth.user.id);
     formData.append("title", values.title);
     formData.append("jobtype", values.jobtype);
+    formData.append("description", values.description);
     formData.append("worklocation", values.worklocation);
     formData.append("worktype", values.worktype);
     formData.append("salaryrange", values.salaryrange);
     formData.append("salarytype", values.salarytype);
+    if(values.firmid){
+      formData.append("firmid", values.firmid)
+    } 
+
     e.preventDefault()
     try {    
       // We will send formData object as a data to the API URL here.
@@ -74,10 +78,11 @@ const SubmitJob  = memo((user) => {
                 </label>
                 <div className="relative">
                   <select className="block appearance-none w-full bg-white border border-gray-400 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:border-gray-500" id="jobtype" name="jobtype" value={values.jobtype} onChange={handleChange}>
-                    <option>Full-time</option>
+                  <option>Full-time</option>
                     <option>Part-time</option>
                     <option>Freelance</option>
-                    <option>Contract</option>
+                    <option>Intern</option>
+                    <option>Builder</option>
                   </select>
                 </div>
             </div>
@@ -100,13 +105,13 @@ const SubmitJob  = memo((user) => {
                 </label>
                 <div className="relative">
                   <select className="block appearance-none w-full bg-white border border-gray-400 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:border-gray-500" id="worktype" name="worktype" value={values.worktype} onChange={handleChange}>
-                    <option>市场推广</option>
-                    <option>合约开发</option>
-                    <option>社群运营</option>
-                    <option>项目推广</option>
-                    <option>市场推广</option>
-                    <option>Web3游戏开发</option>
-                    <option>金融投资</option>
+                  <option>Cryptography & Engineering</option>
+                    <option>Finance & Investment</option>
+                    <option>Marketing & Sales</option>
+                    <option>Public realtion & Brands & Content </option>
+                    <option>Product & Operation</option>
+                    <option>general & administration</option>
+                    <option>Others</option>
                   </select>
 
                 </div>
@@ -133,7 +138,18 @@ const SubmitJob  = memo((user) => {
               <option>Crypto Currency</option>
             </select>
            </p>
-     
+          {  auth.user.roles === "admin"?
+          <div>
+           <select className="block appearance-none w-full bg-white border border-gray-400 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:border-gray-500" id="firmid" name="firmid" value={values.firmid} defaultValue={{ label: "Select Firm", value: 0 }} onChange={handleChange}>
+          { auth.firms.map((option) => (
+                 <option value={option.id}>
+                      {option.title}
+                  </option>
+                  ))}
+         </select>
+           </div>
+          : null
+          }
          </div>
                <div>
                  <button className="bg-teal-500 hover:bg-teal-600 text-white py-2 px-3 rounded" type="submit"   

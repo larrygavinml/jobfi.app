@@ -116,8 +116,14 @@ class JobApiController extends Controller
      */
     public function jobpost(Request $request)
     {       
-            $user = User::where('id','=',$request->userid)->first(); 
-            $firmid = $user->firm_id;
+            if($request->firmid){
+                $firmid = $request->firmid;
+            } 
+            else{
+                $user = User::where('id','=',$request->userid)->first(); 
+                $firmid = $user->firm_id;
+            }
+            
             $newjob = new Job;
             $newjob->title = $request->title;
             $newjob->jobtype = $request->jobtype; 
@@ -127,7 +133,9 @@ class JobApiController extends Controller
             $newjob->salaryrange = $request->salaryrange;
             $newjob->salarytype = $request->salarytype;
             $newjob->firm_id = $firmid;
+            $newjob->hashid = sha1($request->title);
             $newjob->save();
+            $user = User::where('id','=',$request->userid)->first(); 
             $userjob = new User_Job;
             $userjob->user_id = $user->id;
             $userjob->job_id = $newjob->id; 

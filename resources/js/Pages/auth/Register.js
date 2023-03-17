@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Inertia } from '@inertiajs/inertia';
+import { router,usePage } from '@inertiajs/react'
 import { Link, usePage } from '@inertiajs/react'
 import backgroundImage from './assets/images/auth-image.jpg';
 

@@ -1,10 +1,61 @@
 import { Link, usePage } from '@inertiajs/react'
+import { user } from 'fontawesome';
 import React, {useEffect, useRef} from 'react'
 
 function Sidebar({sidebarOpen, setSidebarOpen}) {
         const trigger = useRef(null);
         const sidebar = useRef(null);
         const { user } = usePage().props;
+        const Listrole = (roles) =>  {
+          console.log(roles);
+          if (roles.roles.includes('admin')) {
+            return (
+              <div>
+                <li className="px-3 py-2 rounded-sm mb-0.5">
+                 <Link  href={route('firmjobs', user.id)}  className="block text-gray-200 hover:text-white">
+                  <div className="flex items-center flex-grow">
+                   <i className="w-6 h-6 mr-1 fa-solid fa-vault"></i>
+                   <span className="text-sm font-medium">Firms</span>
+                  </div>
+                 </Link>
+                </li>             
+                <li className="px-3 py-2 rounded-sm mb-0.5">
+                 <Link  href={route('firmmgr.index')}  className="block text-gray-200 hover:text-white">
+                  <div className="flex items-center flex-grow">
+                  <i className="w-6 h-6 mr-1 fa-solid fa-vault"></i>
+                      <span className="text-sm font-medium">FirmsMgr</span>
+                   </div>
+                 </Link>
+                </li>
+                </div>
+            )
+          }
+          if (roles.roles.includes('user')) {
+            return (
+              <div><li className="px-3 py-2 rounded-sm mb-0.5">
+              <Link  href={route('userjobs', user.id)} className="block text-gray-200 hover:text-white">
+                <div className="flex items-center flex-grow">
+                <i className="w-6 h-6 mr-1 fa-solid fa-briefcase"></i>
+                      <span className="text-sm font-medium">Jobs</span>
+                </div>
+              </Link>
+            </li></div>
+            )
+          } 
+          if (roles.roles.includes('firm')) {
+            return (
+              <div><li className="px-3 py-2 rounded-sm mb-0.5">
+               <Link  href={route('firmjobs', user.id)}  className="block text-gray-200 hover:text-white">
+                <div className="flex items-center flex-grow">
+                <i className="w-6 h-6 mr-1 fa-solid fa-vault"></i>
+                      <span className="text-sm font-medium">Firms</span>
+                 </div>
+                 </Link>
+                 </li>
+              </div>
+            )
+          }  
+        };
         // close on click outside
         useEffect(() => {
             const clickHandler = ({ target }) => {
@@ -87,24 +138,8 @@ function Sidebar({sidebarOpen, setSidebarOpen}) {
                 </div>
               </Link>
             </li>
-          {/*jobs 公司job有哪些人应聘*/ }
-             <li className="px-3 py-2 rounded-sm mb-0.5">
-              <Link  href={route('userjobs', user.id)} className="block text-gray-200 hover:text-white">
-                <div className="flex items-center flex-grow">
-                <i className="w-6 h-6 mr-1 fa-solid fa-briefcase"></i>
-                      <span className="text-sm font-medium">Jobs</span>
-                </div>
-              </Link>
-            </li>
-          {/*Company 用户应聘公司信息*/ }
-               <li className="px-3 py-2 rounded-sm mb-0.5">
-              <Link  href={route('firmjobs', user.id)}  className="block text-gray-200 hover:text-white">
-                <div className="flex items-center flex-grow">
-                <i className="w-6 h-6 mr-1 fa-solid fa-vault"></i>
-                      <span className="text-sm font-medium">Firms</span>
-                </div>
-              </Link>
-            </li>
+  
+          <Listrole roles={user.roles}/>         
           </ul>
         </div>
 

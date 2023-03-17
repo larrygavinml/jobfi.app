@@ -5,6 +5,7 @@ use App\Http\Resources\JobCollection;
 use App\Models\Job;
 use App\Models\User_Job;
 use App\Models\User;
+use App\Models\Firm;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +21,7 @@ class JobController extends Controller
     {
         //
         $jobs = Job::orderBy('id', 'DESC')->paginate();
-        return Inertia::render('Joblist', [
+        return Inertia::render('Jobsindex', [
                 'jobs' => $jobs,
         ]);
     }
@@ -118,9 +119,12 @@ class JobController extends Controller
      */
     public function postjob()
     {
-        $jobs = Auth::user()->jobs; 
+        $jobs = Auth::user()->jobs;
+        $firms = Firm::latest()
+        ->get(["id", "title"]);
         return Inertia::render('firmjob/post', [
             'jobs' => $jobs,
+            'firms' => $firms,
         ]);
        
 
@@ -151,7 +155,7 @@ class JobController extends Controller
         //
         $job = Job::where('hashid',$hashid)->first();
         $userjobid = User_Job::where('job_id',$job->id)->pluck('user_id');
-        $loginuser=auth()->user(); 
+        $loginuser = Auth::id(); 
         if($loginuser::whereIn('id', $userjobid )->exists())
         {
             return Inertia::render('job/apply', [

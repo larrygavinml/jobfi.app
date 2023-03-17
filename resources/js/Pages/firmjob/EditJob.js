@@ -78,7 +78,8 @@ const EditJob  = memo((props) => {
                     <option>Full-time</option>
                     <option>Part-time</option>
                     <option>Freelance</option>
-                    <option>Contract</option>
+                    <option>Intern</option>
+                    <option>Builder</option>
                   </select>
                 </div>
             </div>
@@ -101,13 +102,13 @@ const EditJob  = memo((props) => {
                 </label>
                 <div className="relative">
                   <select className="block appearance-none w-full bg-white border border-gray-400 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:border-gray-500" id="worktype" name="worktype" defaultValue={job.worktype} onChange={handleChange}>
-                    <option>市场推广</option>
-                    <option>合约开发</option>
-                    <option>社群运营</option>
-                    <option>项目推广</option>
-                    <option>市场推广</option>
-                    <option>Web3游戏开发</option>
-                    <option>金融投资</option>
+                    <option>Cryptography & Engineering</option>
+                    <option>Finance & Investment</option>
+                    <option>Marketing & Sales</option>
+                    <option>Public realtion & Brands & Content </option>
+                    <option>Product & Operation</option>
+                    <option>general & administration</option>
+                    <option>Others</option>
                   </select>
                 </div>
                </div> 

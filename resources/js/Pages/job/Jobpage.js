@@ -28,7 +28,7 @@ const Jobpage = memo(({job}) => {
           <span className="my-5 text-base block">Worklocation - {job.worklocation}</span>
           <span className={`my-5 text-base block ${job.salaryrange ? '' : 'hidden'}`}>Salary : {job.salaryrange}</span>
           <span className="text-xl block">Description</span>
-          <div className="max-w-2xl text-lg my-2">{job.description}</div>
+          <p className="lg:ml-60 ml-2 mr-20 text-xl max-w-full" dangerouslySetInnerHTML={{ __html: job.description }} />
           <button className="mt-5 rounded-md text-white text-base font-semibold bg-green-500 hover:bg-green-700">{
             user?
             <Link tabIndex="-1"  href={route('job.apply', job.hashid )} className="flex items-center px-14 py-3"> Apply </Link>:
