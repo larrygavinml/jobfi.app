@@ -20,15 +20,15 @@ const Jobpage = memo(({job}) => {
       </div>
 
       <div className="w-full py-20">
-        <div className="lg:ml-96 mx-2">
-          <div className="flex justify-start items-center text-3xl font-bold block">
-            {job.title}
-            <span className="mt-2 ml-20 h-8 px-2 leading-8 rounded text-xs text-white bg-blue-500" >{job.worktype}</span>
+        <div className="lg:ml-80 mx-2">
+          <div className="flex justify-start items-center font-bold block">
+            <div className='text-3xl'>{job.title}</div>
+            <span className=" h-8 lg:leading-8 lg:ml-10 px-2 rounded text-xs text-white bg-blue-500" >{job.worktype}</span>
           </div>
           <span className="my-5 text-base block">Worklocation - {job.worklocation}</span>
           <span className={`my-5 text-base block ${job.salaryrange ? '' : 'hidden'}`}>Salary : {job.salaryrange}</span>
           <span className="text-xl block">Description</span>
-          <p className="lg:ml-60 ml-2 mr-20 text-xl max-w-full" dangerouslySetInnerHTML={{ __html: job.description }} />
+          <p className="lg:mr-64 pt-2 text-lg" dangerouslySetInnerHTML={{ __html: job.description }} />
           <button className="mt-5 rounded-md text-white text-base font-semibold bg-green-500 hover:bg-green-700">{
             user?
             <Link tabIndex="-1"  href={route('job.apply', job.hashid )} className="flex items-center px-14 py-3"> Apply </Link>:

@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { router,usePage } from '@inertiajs/react'
-import { Link, usePage } from '@inertiajs/react'
+import { Link} from '@inertiajs/react'
 import backgroundImage from './assets/images/auth-image.jpg';
 
 function Register() {
