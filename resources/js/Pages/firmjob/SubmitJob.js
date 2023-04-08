@@ -2,6 +2,15 @@ import { memo,useState } from 'react'
 import { router,usePage } from '@inertiajs/react'
 import Swal from 'sweetalert2';
 import axios from "axios";
+
+import "../../../css/SubmitJob.css"
+
+import { EditorState, convertToRaw } from 'draft-js'
+import { Editor } from 'react-draft-wysiwyg'
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
+import draftToHtml from "draftjs-to-html"
+import htmlToDraft from 'html-to-draftjs';
+
 const SubmitJob  = memo((user) => {
   const [values, setValues] = useState({
     title: "",
@@ -14,6 +23,11 @@ const SubmitJob  = memo((user) => {
     userid:"",
     firmid:"",
   })
+
+  const [editorState, setEditorState] = useState(
+    () => EditorState.createEmpty(),
+  )
+
   const auth = usePage().props;
   function handleChange(e) {
     const key = e.target.id;
@@ -25,11 +39,13 @@ const SubmitJob  = memo((user) => {
   }
 
   const handleSubmit = async (e) => {
+    const description = draftToHtml(convertToRaw(editorState.getCurrentContent()))
+
     const formData = new FormData();
     formData.append("userid", auth.user.id);
     formData.append("title", values.title);
     formData.append("jobtype", values.jobtype);
-    formData.append("description", values.description);
+    formData.append("description", description);
     formData.append("worklocation", values.worklocation);
     formData.append("worktype", values.worktype);
     formData.append("salaryrange", values.salaryrange);
@@ -65,7 +81,7 @@ const SubmitJob  = memo((user) => {
      <section className="pt-20 pb-48">
        <div className="w-full max-w-xl mx-auto">
        <form>
-         <h1 className="text-2xl mb-2">Post new job</h1>
+         <h1 className="text-2xl mb-2 postnewjob">Post new job</h1>
           <div className="job-info border-b-2 py-2 mb-5">
           <div className="mb-4">
             <label className="block text-gray-700 text-sm mb-2" for="job-title">Title</label>
@@ -95,7 +111,19 @@ const SubmitJob  = memo((user) => {
 
             <div>
             <label for="description" className="block text-gray-700 text-sm mb-2 w-full">Description</label>
-            <textarea name="description" id="description" value={values.description} onChange={handleChange} cols="" rows="8" className="block text-gray-700 text-sm mb-2 w-full"></textarea>
+            <div>content:{draftToHtml(convertToRaw(editorState.getCurrentContent()))}</div>
+            <div>
+              <Editor
+              editorState={editorState}
+              onEditorStateChange={setEditorState}
+              toolbarClassName="toolbarClassName"
+              wrapperClassName="wrapperClassName"
+              editorClassName="editorClassName"
+              placeholder="Please input job description goes here"
+            />
+            </div>
+            
+            {/* <textarea name="description" id="description" value={values.description} onChange={handleChange} cols="" rows="8" className="block text-gray-700 text-sm mb-2 w-full"></textarea> */}
             </div>
 
            </div>  
