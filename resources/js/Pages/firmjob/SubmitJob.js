@@ -111,7 +111,7 @@ const SubmitJob  = memo((user) => {
 
             <div>
             <label for="description" className="block text-gray-700 text-sm mb-2 w-full">Description</label>
-            <div>content:{draftToHtml(convertToRaw(editorState.getCurrentContent()))}</div>
+            {/* <div>content:{draftToHtml(convertToRaw(editorState.getCurrentContent()))}</div> */}
             <div>
               <Editor
               editorState={editorState}
